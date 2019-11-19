@@ -1,0 +1,99 @@
+@keyframes slideBg{
+    from{
+        background-position: left;
+    }
+    to{
+        background-position: right;
+    }
+}
+@keyframes slidelogo{
+    from{
+        bottom:0;
+    }
+    to{
+        bottom: -30px;
+    }
+}
+
+header nav, header nav ul{
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+header nav p{
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+header nav p img{
+    max-width: 100%;
+    position: absolute;
+    animation:slidelogo 5s linear infinite alternate;
+}
+
+header nav ul{
+    flex: 1;
+}
+
+header nav ul li{
+    list-style-type: none;
+}
+
+header nav li a{
+    background-repeat: no-repeat;
+    display: block;
+    height: 40px;
+    width:40px;
+    position: relative;
+}
+
+header nav li a.homepage{
+    background-image: url("asset/icons/earth.svg");
+}
+
+header nav li a.register{
+    background-image: url("asset/icons/register.svg");
+}
+
+header nav li a.connexion{
+    background-image: url("asset/icons/connexion.svg");
+}
+
+header nav li a.contact{
+    background-image: url("asset/icons/contact.svg");
+}
+
+header nav li a span{
+    position:absolute;
+    top:0;
+    left: 50%;
+    transform: translateX(-50%);
+    color:#FFF;
+    text-decoration: none;
+    opacity: 0;
+    transition: top 0.3s ease-in-out, opacity  0.3s ease-in-out ;
+    filter: invert(1);
+}
+
+header nav li a:hover span{
+    top: 50px;
+    opacity: 1;
+}
+
+/*Homepage*/
+
+.home{
+    height: 100vh;
+    margin:0;
+    background-image:url("asset/bgHome.jpg");
+    animation:slideBg 40s linear infinite alternate;
+}
+
+.home nav li a{
+    filter: invert(1);
+}
+
