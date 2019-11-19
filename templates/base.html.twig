@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body class="{% block classBody %}{% endblock %}">
+    <header>
+        <nav>
+            <p><img src="asset/astroLogo.jpg" alt="logo astronaute espace nasa"></p>
+            <ul>
+                <li><a class="homepage"href="#" title="Accueil"><span>Accueil</span></a></li>
+                <li><a class="register"href="#"title="Inscription"><span>Inscription</span></a></li>
+                <li><a class="connexion"href="#"title="Connexion"><span>Connexion</span></a></li>
+                <li><a class="contact"href="#"title="Contact"><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+    {% block body %}
+    {% endblock %}
+    {% block javascripts %}{% endblock %}
+</body>
+
+</html>
