@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SecurityController!{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+    {{ form_row(form.username, {'label' : 'Pseudo','attr': {'placeholder' : 'Votre pseudo'}} ) }}
+
+    {{ form_row(form.password, {'label' : 'Mot de passe', 'attr': {'placeholder' : 'Votre mot de passe'}} )}}
+    {{ form_row(form.confirmPassword, {'label' : 'Répétez le mot de passe','attr': {'placeholder' : 'Répétez'}}) }}
+    <button type="submit">Inscription</button>
+{{ form_end(form) }}
+{% endblock %}

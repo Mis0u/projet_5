@@ -27,6 +27,7 @@ header nav p{
     border-radius: 100%;
     overflow: hidden;
     position: relative;
+    margin-left: 3rem;
 }
 
 header nav p img{
@@ -69,18 +70,18 @@ header nav li a.contact{
 
 header nav li a span{
     position:absolute;
-    top:0;
-    left: 50%;
-    transform: translateX(-50%);
+    top:50%;
+    left: 0;
+    transform: translateY(-50%);
     color:#FFF;
     text-decoration: none;
     opacity: 0;
-    transition: top 0.3s ease-in-out, opacity  0.3s ease-in-out ;
+    transition: left 0.3s ease-in-out, opacity  0.3s ease-in-out ;
     filter: invert(1);
 }
 
 header nav li a:hover span{
-    top: 50px;
+    left: 50px;
     opacity: 1;
 }
 

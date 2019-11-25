@@ -15,10 +15,11 @@
         <nav>
             <p><img src="asset/astroLogo.jpg" alt="logo astronaute espace nasa"></p>
             <ul>
-                <li><a class="homepage"href="#" title="Accueil"><span>Accueil</span></a></li>
-                <li><a class="register"href="#"title="Inscription"><span>Inscription</span></a></li>
-                <li><a class="connexion"href="#"title="Connexion"><span>Connexion</span></a></li>
+                <li><a class="homepage"href="{{ path("home") }}" title="Accueil"><span>Accueil</span></a></li>
                 <li><a class="contact"href="#"title="Contact"><span>Contact</span></a></li>
+                <li><a class="register"href="{{ path("security_registration") }}"title="Inscription"><span>Inscription</span></a></li>
+                <li><a class="connexion"href="#"title="Connexion"><span>Connexion</span></a></li>
+                
             </ul>
         </nav>
     </header>
