@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
+use App\Entity\User;
 use App\Form\RegistrationType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,12 +16,12 @@ class SecurityController extends AbstractController
      */
     public function register(Request $request, EntityManagerInterface $manager)
     {
-        $users = new Users();
-        $form = $this->createForm(RegistrationType::class, $users);
+        $user = new User();
+        $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $manager->persist($users);
+            $manager->persist($user);
             $manager->flush();
         }
         return $this->render('security/register.html.twig', [

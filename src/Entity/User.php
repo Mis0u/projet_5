@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class Users
+class User
 {
     /**
      * @ORM\Id()
@@ -28,11 +28,10 @@ class Users
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce contenu ne peut pas être vide")
      * @Assert\Length(min=8,minMessage="Minimum 8 caractères")
-     * @Assert\EqualTo(propertyPath="confirmPassword", message="Vos mots de passe doivent être identique")
      */
     private $password;
 
-    private $confirmPassword;
+    private $plainPassword;
 
     public function getId(): ?int
     {
@@ -63,14 +62,14 @@ class Users
         return $this;
     }
 
-    public function getConfirmPassword(): ?string
+    public function getPlainPassword(): ?string
     {
-        return $this->confirmPassword;
+        return $this->plainPassword;
     }
 
-    public function setConfirmPassword(string $confirmPassword): self
+    public function setPlainPassword(string $plainPassword): self
     {
-        $this->confirmPassword = $confirmPassword;
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }

@@ -2,12 +2,24 @@
 
 {% block title %}Hello SecurityController!{% endblock %}
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
 {{ form_start(form) }}
-    {{ form_row(form.username, {'label' : 'Pseudo','attr': {'placeholder' : 'Votre pseudo'}} ) }}
-
-    {{ form_row(form.password, {'label' : 'Mot de passe', 'attr': {'placeholder' : 'Votre mot de passe'}} )}}
-    {{ form_row(form.confirmPassword, {'label' : 'Répétez le mot de passe','attr': {'placeholder' : 'Répétez'}}) }}
-    <button type="submit">Inscription</button>
+    {{ form_label(form.username) }}       
+    {{ form_widget(form.username) }}
+    {{ form_help(form.username) }}
+    <span>{{ form_errors(form.username) }}</span>
+    {{ form_label(form.plainPassword.first)}}
+    {{ form_widget(form.plainPassword.first)}}
+    {{ form_label(form.plainPassword.second)}}
+    {{ form_widget(form.plainPassword.second)}}
+    {{ form_errors(form.plainPassword.second)}}
+    <button type="submit" class="btn btn-primary">Inscription</button>
 {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+<script src="js/errors.js"></script>
+<script src="js/main.js"></script>
 {% endblock %}
