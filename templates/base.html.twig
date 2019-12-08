@@ -18,15 +18,28 @@
             <ul>
                 <li><a class="homepage"href="{{ path("home") }}" title="Accueil"><span>Accueil</span></a></li>
                 <li><a class="contact"href="#"title="Contact"><span>Contact</span></a></li>
+                {% if not is_granted('ROLE_USER') %}
                 <li><a class="register"href="{{ path("security_registration") }}"title="Inscription"><span>Inscription</span></a></li>
-                <li><a class="connexion"href="#"title="Connexion"><span>Connexion</span></a></li>
+                <li><a class="connexion"href="{{ path("app_login")}}"title="Connexion"><span>Connexion</span></a></li>
+                {% else %}
+                <li><a class="profile" href="{{ path("user_profile") }}" title="Tableau de bord"><span>Dashboard</span></a></li>
+                <li><a class="logout"href="{{ path("app_logout") }}"title="Logout"><span>Déconnexion</span></a></li>
+                {% endif %}
                 
             </ul>
         </nav>
     </header>
-    {% block body %}
+    <section class="main">
+        {% block body %}
+        {% endblock %}
+
+    </section>
+
+    <footer>
+        <p>Create by Mickaël | <a href="#">Crédits</a></p>
+    </footer>
+    {% block javascripts %}
     {% endblock %}
-    {% block javascripts %}{% endblock %}
 </body>
 
 </html>

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+{% block classBody %}userProfile{% endblock %}
+
+
+{% block body %}
+<section class="info">
+    <article class="dashboard">
+        {% if user.images|length in 0..10 %}
+        <h1>Cabine de l'officier {{ user.username }} </h1>
+        {% endif %}
+        <p> Vous avez publié {{ user.images|length }} photos</p>
+    </article>
+</section>
+{% endblock %}

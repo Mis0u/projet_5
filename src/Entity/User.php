@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\EntityListeners({"App\Listener\HashPasswordListener"})
+ * @UniqueEntity(fields={"username"}, message ="Ce cosmonaute existe déja !")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -26,12 +31,20 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Ce contenu ne peut pas être vide")
-     * @Assert\Length(min=8,minMessage="Minimum 8 caractères")
      */
     private $password;
 
     private $plainPassword;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="user", cascade{"persist", "remove"})
+     */
+    private $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -67,10 +80,40 @@ class User
         return $this->plainPassword;
     }
 
-    public function setPlainPassword(string $plainPassword): self
+    public function setPlainPassword(?string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
 
         return $this;
     }
+
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    public function addImages(Image $image)
+    {
+        $this->images->add($image);
+    }
+
+    public function removeImages(Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function getSalt()
+    {
+
+    }
+    public function eraseCredentials()
+    {
+    }
+
+
 }
