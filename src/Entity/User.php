@@ -37,7 +37,7 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="user", cascade{"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="user", cascade={"persist", "remove"})
      */
     private $images;
 
@@ -92,16 +92,6 @@ class User implements UserInterface
         return $this->images;
     }
 
-    public function addImages(Image $image)
-    {
-        $this->images->add($image);
-    }
-
-    public function removeImages(Image $image)
-    {
-        $this->images->removeElement($image);
-    }
-
     public function getRoles()
     {
         return array('ROLE_USER');
@@ -113,6 +103,7 @@ class User implements UserInterface
     }
     public function eraseCredentials()
     {
+
     }
 
 

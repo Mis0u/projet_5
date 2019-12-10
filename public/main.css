@@ -106,7 +106,7 @@ header nav li a span{
     filter: invert(1);
 }
 
-header nav li a:hover span{
+header nav li a:hover span, header nav li a.active span{
     left: 50px;
     opacity: 1;
 }

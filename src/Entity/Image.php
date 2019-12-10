@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
@@ -23,10 +26,18 @@ class Image
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="images")
      */
     private $user;
 
+    /**
+     * @Assert\File(
+     *  maxSize = "2000k",
+     * mimeTypes = {"image/png","image/jpeg"},
+     * mimeTypesMessage = "Please upload a valid PDF"
+     * )
+     * @Assert\NotNull(message="Ce contenu ne peut pas être vide")
+     */
     private $file;
 
     public function getId(): ?int
@@ -46,12 +57,12 @@ class Image
         return $this;
     }
 
-    public function getUser()
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(string $user): self
+    public function setUser($user): self
     {
         $this->user = $user;
 

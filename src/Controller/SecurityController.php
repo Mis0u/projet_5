@@ -25,7 +25,7 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $manager->persist($user);
             $manager->flush();
-            $this->addFlash("register_message","Vous êtes monté dans la fusée, il vous reste plus qu'à faire un pas sur la lune");
+            $this->addFlash("register_message","Vous êtes monté dans la fusée, il vous reste plus qu'à poser un pas sur la lune");
             return $this->redirectToRoute('app_login');
         }
         return $this->render('security/register.html.twig', [
@@ -39,7 +39,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('/profile');
          }
 
         // get the login error if there is one

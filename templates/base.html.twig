@@ -7,22 +7,31 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
     {% block stylesheets %}{% endblock %}
 </head>
 
 <body class="{% block classBody %}{% endblock %}">
     <header>
         <nav>
-            <p><img src="asset/astroLogo.jpg" alt="logo astronaute espace nasa"></p>
+                {% for message in app.flashes('success_upload') %}
+                <div class="flash-notice">
+                <div class="alert alert-success" role="alert">
+                        {{ message }}
+                </div>
+                </div>
+                {% endfor %}
+            {% set route = app.request.attributes.get('_route') %}
+
+            <p><img src="/asset/astroLogo.jpg" alt="logo astronaute espace nasa"></p>
             <ul>
-                <li><a class="homepage"href="{{ path("home") }}" title="Accueil"><span>Accueil</span></a></li>
-                <li><a class="contact"href="#"title="Contact"><span>Contact</span></a></li>
+                <li><a class="homepage {% if  route== 'home' %}active{% endif %}"href="{{ path("home") }}" title="Accueil"><span>Accueil</span></a></li>
+                <li><a class="contact {% if  route== 'contact' %}active{% endif %}"href="#"title="Contact"><span>Contact</span></a></li>
                 {% if not is_granted('ROLE_USER') %}
-                <li><a class="register"href="{{ path("security_registration") }}"title="Inscription"><span>Inscription</span></a></li>
-                <li><a class="connexion"href="{{ path("app_login")}}"title="Connexion"><span>Connexion</span></a></li>
+                <li><a class="register {% if  route== 'security_registration' %}active{% endif %}"href="{{ path("security_registration") }}"title="Inscription"><span>Inscription</span></a></li>
+                <li><a class="connexion {% if  route== 'app_login' %}active{% endif %}"href="{{ path("app_login")}}"title="Connexion"><span>Connexion</span></a></li>
                 {% else %}
-                <li><a class="profile" href="{{ path("user_profile") }}" title="Tableau de bord"><span>Dashboard</span></a></li>
+                <li><a class="profile {% if  route== 'user_profile' %}active{% endif %}" href="{{ path("user_profile") }}" title="Tableau de bord"><span>Dashboard</span></a></li>
                 <li><a class="logout"href="{{ path("app_logout") }}"title="Logout"><span>Déconnexion</span></a></li>
                 {% endif %}
                 
@@ -43,3 +52,4 @@
 </body>
 
 </html>
+
