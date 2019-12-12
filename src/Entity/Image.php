@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -32,13 +34,23 @@ class Image
 
     /**
      * @Assert\File(
-     *  maxSize = "2000k",
+     * maxSize = "2000k",
      * mimeTypes = {"image/png","image/jpeg"},
-     * mimeTypesMessage = "Please upload a valid PDF"
+     * mimeTypesMessage = "Uploadez seulement au format png ou jpg"
      * )
      * @Assert\NotNull(message="Ce contenu ne peut pas être vide")
      */
     private $file;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="images")
+     */
+    private $tags;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -77,5 +89,31 @@ class Image
     public function setFile(UploadedFile $file): void
     {
         $this->file = $file;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
+
+        return $this;
     }
 }

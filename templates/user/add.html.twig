@@ -10,3 +10,21 @@
 
 
 {% endblock %}
+
+{% block javascripts %}
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+
+    <script>
+        $('.custom-file-input').on('change', function(event)
+         {
+            var inputFile = event.currentTarget;
+            $(inputFile).parent()
+                        .find('.custom-file-label')
+                        .html(inputFile.files[0].name);
+        });
+    </script>
+{% endblock %}
