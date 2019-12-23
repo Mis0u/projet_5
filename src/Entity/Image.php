@@ -33,6 +33,12 @@ class Image
     private $user;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Eh ben alors, on ne veut pas lui donner un titre")
+     */
+    private $title;
+
+    /**
      * @Assert\File(
      * maxSize = "2000k",
      * mimeTypes = {"image/png","image/jpeg"},
@@ -46,6 +52,11 @@ class Image
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="images")
      */
     private $tags;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $hiddenTags;
 
     public function __construct()
     {
@@ -65,6 +76,18 @@ class Image
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }
@@ -113,6 +136,18 @@ class Image
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
         }
+
+        return $this;
+    }
+
+    public function getHiddenTags(): ?string
+    {
+        return $this->hiddenTags;
+    }
+
+    public function setHiddenTags(?string $hiddenTags): self
+    {
+        $this->hiddenTags = $hiddenTags;
 
         return $this;
     }

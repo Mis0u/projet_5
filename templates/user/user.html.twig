@@ -1,10 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello UserController!{% endblock %}
-{% block classBody %}userProfile{% endblock %}
+
+{% block stylesheets %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block classBody %}userProfile user{% endblock %}
 
 
 {% block body %}
+<aside>
+    <img class="rocket" src="/asset/icons/fusee.svg" alt="logo fusée espace nasa">
+    <div class="content">
+        <ul>
+            <li><a href="{{ path('add_image') }}">Ajouter une image</a></li>
+            <li><a href="{{ path('display_images') }}">Afficher mes images</a></li>
+        </ul>
+    </div>
+</aside>
 <section class="info">
     <article class="dashboard">
         {% if user.images|length in 0..10 %}
@@ -13,4 +27,8 @@
         <p> Vous avez publié {{ user.images|length }} photos</p>
     </article>
 </section>
+{% endblock %}
+
+{% block javascripts %}
+<script src="/js/moveAside.js"></script>
 {% endblock %}

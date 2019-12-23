@@ -19,13 +19,10 @@ class TagRepository extends ServiceEntityRepository
         parent::__construct($registry, Tag::class);
     }
 
-    // /**
-    //  * @return Tag[] Returns an array of Tag objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findImagesByTag($value)
     {
         return $this->createQueryBuilder('t')
+            ->leftJoin('t.images', 'image')
             ->andWhere('t.exampleField = :val')
             ->setParameter('val', $value)
             ->orderBy('t.id', 'ASC')
@@ -34,7 +31,7 @@ class TagRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Tag

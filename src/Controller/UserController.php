@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Form\ImageType;
+use App\Repository\TagRepository;
+use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends AbstractController
 {
@@ -18,6 +20,7 @@ class UserController extends AbstractController
     public function userProfile()
     {
         $user = $this->getUser();
+
         return $this->render('user/user.html.twig', ["user"=>$user]);
     }
 
@@ -57,11 +60,29 @@ class UserController extends AbstractController
                 return $this->redirectToRoute("user_profile");
 
             }
-
-           
-
             return $this->render("user/add.html.twig",[
                 "form" => $form->createView(),
             ]);
+    }
+
+    /**
+     * @Route("/profile/images", name="display_images")
+     */
+    public function displayImages(ImageRepository $imageRepository)
+    {
+        $user = $this->getUser();
+        $getAllImages = $imageRepository->findBy(['user' => $user]);
+
+        return $this->render("user/allImages.html.twig", ["images" => $getAllImages, 'user' => $user]);
+    }
+
+    /**
+     * @Route("/profile/tags/{tag}", name="display_images_tags")
+     */
+    public function displayImagesTags(TagRepository $tagRepository, $tag)
+    {
+        $getTag = $tagRepository->findBy(['name' => $tag]);
+        dd($getTag);
+        return $this->render("user/imagesFromTags.html.twig", ["tag" => $getTag]);
     }
 }

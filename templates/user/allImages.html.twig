@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+{% block title %}Hello UserController!{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">{% endblock %}
+
+
+{% block classBody %}userImages user{% endblock %}
+
+{% block body %}
+
+<div class = "container">
+{% for image in images %}
+    <div class="card">
+        <a href="{{ image.name }}" data-lightbox="{{ user.username }}" data-title="{{ image.title }}">
+            <img class="card-img-top" src= "{{ image.name }}">
+        </a>
+        <h5> {{ image.title }} </h5>
+        <div class="card-body">
+           {% for tags in image.tags %}
+                <span><a href="#">#{{ tags.name }}</a></span>
+           {% endfor %}
+        </div>
+    </div>
+
+{% endfor %}
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script
+src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+{% endblock %}

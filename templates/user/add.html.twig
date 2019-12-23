@@ -1,9 +1,19 @@
 {% extends "base.html.twig" %}
 
-{% block body %}
 
+{% block stylesheets %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
 {{ form_start(form) }}
 {{ form_row(form.file) }}
+{{ form_row(form.title) }}
+{{ form_label(form.tags) }}
+{{ form_widget(form.tags) }}
+
+{{ form_row(form.hiddenTags) }}
+
 <button type="submit" class="btn btn-primary">Envoyer</button>
 
 {{ form_end(form) }}
@@ -27,4 +37,9 @@
                         .html(inputFile.files[0].name);
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+
+    </script>
+    <script src="/js/selectForm.js"></script>
 {% endblock %}
