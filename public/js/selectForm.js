@@ -1,7 +1,14 @@
 $(document).ready(function(){
 
-    $('#image_tags').select2({
+    $('#image_allTags').select2({
         tags: true,
         tokenSeparators: [',', ' ']
     });
+
+    $('form[name=image]').on('submit', function(){
+        let getTags = $('#image_allTags').select2('data').map(function(tag){
+            return tag.text
+        }).join(",");
+        $('#image_tags').val(getTags);
+    })
 })

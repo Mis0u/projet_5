@@ -139,6 +139,7 @@ header nav li a{
     height: 500px;
     border-radius: 50px;
     padding: 20px;
+    width: 40%;
 }
 
 .userProfile aside{

@@ -49,7 +49,7 @@ class Image
     private $file;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="images")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="images", cascade={"persist"})
      */
     private $tags;
 

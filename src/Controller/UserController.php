@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Image;
+use App\Entity\Tag;
 use App\Form\ImageType;
 use App\Repository\TagRepository;
 use App\Repository\ImageRepository;
@@ -35,13 +36,12 @@ class UserController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()){
-
                 /**@var UploadedFile $file */
                 $file = $form["file"]->getData();
 
+               // $image->addTag($tag);
                 if ($file) {
                     $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-
                     $newFilename = $originalFilename.'-'.uniqid().'.'.$file->guessExtension();
 
                     $image->setName($newFilename);
@@ -50,7 +50,6 @@ class UserController extends AbstractController
                         $this->getParameter('images_directory'),
                         $newFilename
                     );
-    
                 };
 
                 $manager->persist($image);
@@ -72,17 +71,14 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
         $getAllImages = $imageRepository->findBy(['user' => $user]);
-
         return $this->render("user/allImages.html.twig", ["images" => $getAllImages, 'user' => $user]);
     }
 
     /**
-     * @Route("/profile/tags/{tag}", name="display_images_tags")
+     * @Route("/profile/tags/{name}", name="display_images_tags")
      */
-    public function displayImagesTags(TagRepository $tagRepository, $tag)
-    {
-        $getTag = $tagRepository->findBy(['name' => $tag]);
-        dd($getTag);
-        return $this->render("user/imagesFromTags.html.twig", ["tag" => $getTag]);
+    public function displayImagesTags(Tag $tag)
+    {  
+        return $this->render("user/imagesFromTags.html.twig", ["tag" => $tag]);
     }
 }

@@ -16,6 +16,11 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ImageType extends AbstractType
 {
+    public function __construct(TagsTransformer $tagsTransformer)
+    {
+        $this->tagsTransformer = $tagsTransformer;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -28,21 +33,22 @@ class ImageType extends AbstractType
                 'help' => "Maximum 2Mo (jpg, png, jpeg)"
                 
             ])
-            ->add('tags', EntityType::class, [
+            ->add('allTags', EntityType::class, [
                 'class'=> Tag::class,
+                'label' => 'Ajouter vos tags :',
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => false,
+                'mapped' => false
             ])
 
-            ->add('hiddenTags', HiddenType::class,[
+            ->add('tags', HiddenType::class,[
                 'required' => false,
             ]);
 
         $builder
             ->get('tags')
-            //->addModelTransformer(new CollectionToArrayTransformer(), true)
-            ->addModelTransformer(new TagsTransformer(), true);
+            ->addModelTransformer($this->tagsTransformer, true);
 
     }
 

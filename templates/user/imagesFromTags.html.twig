@@ -8,9 +8,12 @@
 {% block body %}
 
 <div class = "container">
-    {% for test in tag %}
-    <p> {{ test.name }} </p>
+
+    {% for image in tag.images %}
+    <img src="{{ image.name }}">
     {% endfor %}
+
+
 </div>
 
 {% endblock %}
