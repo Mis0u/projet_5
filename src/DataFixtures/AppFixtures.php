@@ -29,7 +29,7 @@ class AppFixtures extends Fixture
 
         for ($h = 1; $h <= 15; $h++){
             $tag = new Tag();
-            $tag->setName($this->faker->planet());
+            $tag->setName($this->faker->unique()->word());
             $manager->persist($tag);
             $tags[$h]=$tag;
         }

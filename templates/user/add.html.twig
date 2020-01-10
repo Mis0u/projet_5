@@ -6,11 +6,29 @@
 {% endblock %}
 
 {% block body %}
+
+{% set formArray = form.tags.vars.value|split(',') %}
+
+{% if image.id %}
+<h1>Modification de l'image :</h1>
+<p><img src="{{ image.name }}"></p>
+{% else %}
+<h1>Ajout d'une image :</h1>
+{% endif %}
+
+
 {{ form_start(form) }}
 {{ form_row(form.file) }}
 {{ form_row(form.title) }}
-{{ form_label(form.allTags) }}
-{{ form_widget(form.allTags) }}
+<div class="form-group">
+    <label for="image_allTags">Ajouter vos tags</label>
+    <select id="image_allTags" required="required" class="form-control" multiple=""  tabindex="-1" aria-hidden="true">
+    {% for tag in tags %}
+    <option value="{{ tag.id }}"{% if image.id %}{% if tag.name in formArray %} selected="selected" {% endif %}{% endif %}>{{ tag.name }}</option>
+    {% endfor %}
+    </select>
+   
+</div>
 
 {{ form_row(form.tags) }}
 
@@ -21,12 +39,7 @@
 
 {% endblock %}
 
-{% block javascripts %}
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous">
-    </script>
+{% block javascript %}
 
     <script>
         $('.custom-file-input').on('change', function(event)
@@ -40,6 +53,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
-    </script>
     <script src="/js/selectForm.js"></script>
+
 {% endblock %}

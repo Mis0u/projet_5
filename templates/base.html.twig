@@ -14,7 +14,7 @@
 <body class="{% block classBody %}{% endblock %}">
     <header>
         <nav>
-                {% for message in app.flashes('success_upload') %}
+                {% for message in app.flashes('success') %}
                 <div class="flash-notice">
                 <div class="alert alert-success" role="alert">
                         {{ message }}
@@ -48,7 +48,12 @@
     <footer>
         <p>Create by Mickaël | <a href="#">Crédits</a></p>
     </footer>
-    {% block javascripts %}
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous">
+</script>
+    {% block javascript %}
     {% endblock %}
 </body>
 

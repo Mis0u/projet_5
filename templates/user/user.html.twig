@@ -21,7 +21,7 @@
 </aside>
 <section class="info">
     <article class="dashboard">
-        {% if user.images|length in 0..10 %}
+        {% if user.images|length in 0..50 %}
         <h1>Cabine de l'officier {{ user.username }} </h1>
         {% endif %}
         <p> Vous avez publié {{ user.images|length }} photos</p>
@@ -29,6 +29,6 @@
 </section>
 {% endblock %}
 
-{% block javascripts %}
+{% block javascript %}
 <script src="/js/moveAside.js"></script>
 {% endblock %}

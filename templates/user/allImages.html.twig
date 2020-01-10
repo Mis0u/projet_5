@@ -6,6 +6,13 @@
 {% block classBody %}userImages user{% endblock %}
 
 {% block body %}
+{% for message in app.flashes('success_delete') %}
+                <div class="flash-notice">
+                <div class="alert alert-success" role="alert">
+                        {{ message }}
+                </div>
+                </div>
+                {% endfor %}
 
 <div class = "container">
 {% for image in images %}
@@ -16,21 +23,18 @@
         <h5> {{ image.title }} </h5>
         <div class="card-body">
            {% for tags in image.tags %}
-                <span><a href="#">#{{ tags.name }}</a></span>
+                <span><a href="{{ path('display_images_tags', {'name': tags.name }) }}">#{{ tags.name }}</a></span>
            {% endfor %}
+           <a href="{{ path('delete_image', {'id': image.id}) }}" class="delete" onclick="return confirm('Confirmer la suppression')" title="Supprimer l'image"><img src="/asset/icons/delete.png"></a>
+           <a href="{{ path('edit_image', {'id': image.id}) }}" class="edit" title="Modifier l'image"><img src="/asset/icons/edit.png"></a>
         </div>
     </div>
 
 {% endfor %}
 </div>
 
-{% endblock %}
+{% endblock %} 
 
-{% block javascripts %}
-<script
-src="https://code.jquery.com/jquery-3.4.1.min.js"
-integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-crossorigin="anonymous">
-</script>
+{% block javascript %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 {% endblock %}

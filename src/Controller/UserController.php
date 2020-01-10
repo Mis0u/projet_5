@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Image;
 use App\Entity\Tag;
+use App\Entity\Image;
 use App\Form\ImageType;
 use App\Repository\TagRepository;
 use App\Repository\ImageRepository;
@@ -27,11 +27,16 @@ class UserController extends AbstractController
 
     /**
      * @Route("/profile/add", name="add_image")
+     * @Route("/profile/edit/{id}", name="edit_image")
      */
-    public function addImage(EntityManagerInterface $manager, Request $request)
+    public function addImage(EntityManagerInterface $manager, Request $request, TagRepository $tagRepository, Image $image = NULL)
     {
-            $image = new Image();
+            if (!$image){
+                $image = new Image();
+            }
+            
             $user = $this->getUser();
+            $selectTags = $tagRepository->findAll();
             $form = $this->createForm(ImageType::class, $image);
             $form->handleRequest($request);
 
@@ -39,7 +44,6 @@ class UserController extends AbstractController
                 /**@var UploadedFile $file */
                 $file = $form["file"]->getData();
 
-               // $image->addTag($tag);
                 if ($file) {
                     $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                     $newFilename = $originalFilename.'-'.uniqid().'.'.$file->guessExtension();
@@ -55,12 +59,15 @@ class UserController extends AbstractController
                 $manager->persist($image);
                 $manager->flush();
 
-                $this->addFlash("success_upload","Votre image a bien été uploadé");
+                if (!$image){
+                    $this->addFlash("success","Votre image a bien été uploadé");
+                }
+                $this->addFlash("success","Votre image a bien été modifié");
                 return $this->redirectToRoute("user_profile");
 
             }
             return $this->render("user/add.html.twig",[
-                "form" => $form->createView(),
+                "form" => $form->createView(), 'tags' => $selectTags, 'image' => $image
             ]);
     }
 
@@ -77,8 +84,33 @@ class UserController extends AbstractController
     /**
      * @Route("/profile/tags/{name}", name="display_images_tags")
      */
-    public function displayImagesTags(Tag $tag)
+    public function displayImagesTags(Tag $tag, ImageRepository $imageRepository)
     {  
-        return $this->render("user/imagesFromTags.html.twig", ["tag" => $tag]);
+        $user = $this->getUser();
+        $getAllImages = $imageRepository->findBy(['user' => $user]);
+        return $this->render("user/imagesFromTags.html.twig", ["tag" => $tag, "images" => $getAllImages]);
     }
+
+    /**
+     * @Route("/profile/delete/{id}", name="delete_image")
+     */
+    public function delete(Image $image, EntityManagerInterface $manager){
+        $manager->remove($image);
+        $manager->flush();
+
+        $this->addFlash("success_delete","Votre image a bien été supprimé");
+        return $this->redirectToRoute("display_images");
+    }
+
+    /*
+     public function edit(Image $image, EntityManagerInterface $manager, Request $request){
+
+        $form = $this->createForm(ImageType::class, $image);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            return $this->render("user/add.html.twig", ["image" => $image, "form" => $form->createView()]);   
+
+        }
+     } */
 }

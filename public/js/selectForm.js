@@ -9,6 +9,8 @@ $(document).ready(function(){
         let getTags = $('#image_allTags').select2('data').map(function(tag){
             return tag.text
         }).join(",");
+        
         $('#image_tags').val(getTags);
     })
+
 })

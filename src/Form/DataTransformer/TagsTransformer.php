@@ -30,6 +30,7 @@ class TagsTransformer implements DataTransformerInterface
             if ($tag == NULL){
                 $tag = new Tag();
                 $tag->setName($tagName);
+                
             }
             $tagsCollection->add($tag);
         }
