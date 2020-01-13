@@ -102,15 +102,4 @@ class UserController extends AbstractController
         return $this->redirectToRoute("display_images");
     }
 
-    /*
-     public function edit(Image $image, EntityManagerInterface $manager, Request $request){
-
-        $form = $this->createForm(ImageType::class, $image);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            return $this->render("user/add.html.twig", ["image" => $image, "form" => $form->createView()]);   
-
-        }
-     } */
 }

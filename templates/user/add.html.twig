@@ -16,8 +16,11 @@
 <h1>Ajout d'une image :</h1>
 {% endif %}
 
-
+{% if image.id %}
+{{ form_start(form, {attr: {novalidate:'novalidate'}}) }}
+{% else %}
 {{ form_start(form) }}
+{% endif %}
 {{ form_row(form.file) }}
 {{ form_row(form.title) }}
 <div class="form-group">

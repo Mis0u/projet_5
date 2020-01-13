@@ -41,6 +41,11 @@ class User implements UserInterface
      */
     private $images;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $roles = "ROLE_USER";
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -94,7 +99,7 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return array($this->roles);
     }
 
     public function getSalt()
@@ -104,6 +109,13 @@ class User implements UserInterface
     public function eraseCredentials()
     {
 
+    }
+
+    public function setRoles(string $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
 

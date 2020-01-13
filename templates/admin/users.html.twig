@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+{% block classBody %} adminUsers {% endblock %}
+
+
+{% block body %}
+{% for message in app.flashes('success_delete') %}
+                <div class="flash-notice">
+                <div class="alert alert-success" role="alert">
+                        {{ message }}
+                </div>
+                </div>
+{% endfor %}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Pseudo</th>
+                <th scope="col">Images uploadées</th>
+                <th scope="col">Actions</th>
+              </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td> {{ user.username }} </td>
+                <td> {{ user.images|length }} </td>
+                <td> <a href="{{path('admin_delete_user', {'id': user.id} )}}" class="btn btn-danger" onclick="return confirm('Confirmer la suppression de {{ user.username }}')">Supprimer</a> </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+  <div class="navigation">
+    {{ knp_pagination_render(users) }}
+</div>
+{% endblock %}

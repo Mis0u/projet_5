@@ -44,7 +44,6 @@ class Image
      * mimeTypes = {"image/png","image/jpeg"},
      * mimeTypesMessage = "Uploadez seulement au format png ou jpg"
      * )
-     * @Assert\NotNull(message="Ce contenu ne peut pas être vide")
      */
     private $file;
 
@@ -52,11 +51,6 @@ class Image
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="images", cascade={"persist"})
      */
     private $tags;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $hiddenTags;
 
     public function __construct()
     {
@@ -140,15 +134,4 @@ class Image
         return $this;
     }
 
-    public function getHiddenTags(): ?string
-    {
-        return $this->hiddenTags;
-    }
-
-    public function setHiddenTags(?string $hiddenTags): self
-    {
-        $this->hiddenTags = $hiddenTags;
-
-        return $this;
-    }
 }

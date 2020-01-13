@@ -26,6 +26,9 @@
         {% endif %}
         <p> Vous avez publié {{ user.images|length }} photos</p>
     </article>
+    {% if is_granted('ROLE_ADMIN') %}
+    <p class="admin-btn btn "><a href="{{path('admin')}}">Administration</a></p>
+    {% endif %}
 </section>
 {% endblock %}
 

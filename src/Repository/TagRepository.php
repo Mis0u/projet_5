@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Tag;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Tag|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,7 +19,7 @@ class TagRepository extends ServiceEntityRepository
         parent::__construct($registry, Tag::class);
     }
 
-    public function findImagesByTag($value)
+    /* public function findImagesByTag($value)
     {
         return $this->createQueryBuilder('t')
             ->leftJoin('t.images', 'image')
@@ -30,7 +30,7 @@ class TagRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
-    }
+    } */
     
 
     /*
