@@ -13,6 +13,11 @@
                 </div>
 {% endfor %}
 
+{{ form_start(form) }}
+{{ form_row(form.username) }}
+<button class="btn btn-primary" type="submit">Rechercher</button>
+{{ form_end(form) }}
+
 <div class="table-responsive">
     <table class="table">
         <thead class="thead-dark">
@@ -35,6 +40,12 @@
         </tbody>
     </table>
   </div>
+
+  {% if users|length <= 1 %}
+  <a class="allUser" href="{{path('admin_users')}}">
+      Tout les utilisateurs
+  </a>
+  {% endif %}
 
   <div class="navigation">
     {{ knp_pagination_render(users) }}

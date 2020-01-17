@@ -4,5 +4,8 @@
 {% block title %}Hello HomeController!{% endblock %}
 {% block classBody %}home {% endblock %}
 {% block body %}
-
+    {{ form_start(form) }}
+    {{ form_widget(form.name) }}
+    <button type = "submit">Rechercher</button>
+    {{ form_end(form) }}
 {% endblock %}

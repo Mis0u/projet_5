@@ -7,7 +7,11 @@
 
 {% block body %}
 
-<h1>Ajout d'une image :</h1>
+{% set formArray = form.tags.vars.value|split(',') %}
+
+
+<h1>Modification de l'image :</h1>
+<p><img src="{{ image.name }}"></p>
 
 
 {{ form_start(form) }}
@@ -17,7 +21,7 @@
     <label for="image_allTags">Ajouter vos tags</label>
     <select id="image_allTags" required="required" class="form-control" multiple=""  tabindex="-1" aria-hidden="true">
     {% for tag in tags %}
-    <option value="{{ tag.id }}">{{ tag.name }}</option>
+    <option value="{{ tag.id }}"{% if tag.name in formArray %} selected="selected" {% endif %}>{{ tag.name }}</option>
     {% endfor %}
     </select>
    

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+{% block classBody %} search {% endblock %}
+
+{% block body %}
+{% for result in tags %}
+<p> {{ result.name }} </p>
+{% endfor %}
+{% endblock %}

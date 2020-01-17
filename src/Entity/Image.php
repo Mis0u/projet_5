@@ -44,6 +44,7 @@ class Image
      * mimeTypes = {"image/png","image/jpeg"},
      * mimeTypesMessage = "Uploadez seulement au format png ou jpg"
      * )
+     * @Assert\NotBlank(groups={"add_image"})
      */
     private $file;
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body class="{% block classBody %}{% endblock %}">
+    <section class="main">
+        {% block body %}
+       
+        {% endblock %}
+
+    </section>
+
+    {% block javascript %}
+    {% endblock %}
+</body>
+
+</html>
+

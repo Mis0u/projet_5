@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Image;
+use App\Entity\SearchImages;
 use Doctrine\ORM\Query;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -20,28 +21,33 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
-    public function findAllWithPagination() : Query
+    public function findAllWithPagination(SearchImages $searchImages) : Query
     {
-        return $this->createQueryBuilder("i")
-                ->getQuery();
+        $req = $this->createQueryBuilder("i");
+        if ($searchImages->getTitle()){
+            $req = $req->andWhere('i.title = :title')
+            ->setParameter(':title', $searchImages->getTitle());
+        }
+        return $req->getQuery();
     }
 
     // /**
     //  * @return Image[] Returns an array of Image objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findImagesByTag($value)
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
+            ->leftJoin('i.tags', 'tag')
+            ->andWhere('i.tags.["name"] = :val')
+            ->setParameter('val', $value->getName())
             ->orderBy('i.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Image

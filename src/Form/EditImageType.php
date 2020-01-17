@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-class ImageType extends AbstractType
+class EditImageType extends AbstractType
 {
     public function __construct(TagsTransformer $tagsTransformer)
     {
@@ -44,7 +44,6 @@ class ImageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Image::class,
-            'validation_groups' => ['Default', 'add_image']
         ]);
     }
 }

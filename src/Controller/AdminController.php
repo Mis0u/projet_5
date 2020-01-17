@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Image;
+use App\Entity\SearchImages;
+use App\Entity\SearchUsers;
+use App\Form\SearchUsersType;
+use App\Form\SearchImagesType;
 use App\Repository\UserRepository;
 use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,12 +31,16 @@ class AdminController extends AbstractController
      */
     public function displayUsers(UserRepository $users, PaginatorInterface $pi, Request $request)
     {
+        $searchUsers = new SearchUsers();
+        $form = $this->createForm(SearchUsersType::class, $searchUsers);
+        $form->handleRequest($request);
+
         $getAllUsers = $pi->paginate(
-            $users->findAllWithPagination(), 
+            $users->findAllWithPagination($searchUsers), 
             $request->query->getInt('page', 1), 
             10 
         );
-        return $this->render('admin/users.html.twig', ['users' =>$getAllUsers]);
+        return $this->render('admin/users.html.twig', ['users' =>$getAllUsers, 'form' => $form->createView()]);
     }
 
     /**
@@ -40,12 +48,16 @@ class AdminController extends AbstractController
      */
     public function displayImages(ImageRepository $images, PaginatorInterface $pi, Request $request)
     {
+        $searchImages = new SearchImages();
+        $form = $this->createForm(SearchImagesType::class, $searchImages);
+        $form->handleRequest($request);
+
         $getAllImages = $pi->paginate(
-            $images->findAllWithPagination(), 
+            $images->findAllWithPagination($searchImages), 
             $request->query->getInt('page', 1), 
             10 
         );
-        return $this->render('admin/images.html.twig', ['images' =>$getAllImages]);
+        return $this->render('admin/images.html.twig', ['images' =>$getAllImages, 'form' => $form->createView()]);
     }
 
      /**

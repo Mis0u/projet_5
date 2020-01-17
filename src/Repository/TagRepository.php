@@ -19,12 +19,12 @@ class TagRepository extends ServiceEntityRepository
         parent::__construct($registry, Tag::class);
     }
 
-    /* public function findImagesByTag($value)
+    /*public function findImagesByTag()
     {
         return $this->createQueryBuilder('t')
             ->leftJoin('t.images', 'image')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('t.name = :val')
+            ->setParameter('val')
             ->orderBy('t.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()

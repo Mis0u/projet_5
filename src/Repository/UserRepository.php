@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\SearchUsers;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -20,10 +21,15 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    public function findAllWithPagination() : Query
+    public function findAllWithPagination(SearchUsers $searchUsers) : Query
     {
-        return $this->createQueryBuilder("u")
-                ->getQuery();
+        $req = $this->createQueryBuilder("u");
+        if ($searchUsers->getUsername()){
+            $req = $req ->andWhere('u.username = :name')
+            ->setParameter(':name', $searchUsers->getUsername());
+        }
+                
+        return $req->getQuery();
     }
 
     // /**

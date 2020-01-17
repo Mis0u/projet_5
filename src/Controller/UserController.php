@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Tag;
 use App\Entity\Image;
 use App\Form\ImageType;
+use App\Form\EditImageType;
 use App\Repository\TagRepository;
 use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,14 +28,11 @@ class UserController extends AbstractController
 
     /**
      * @Route("/profile/add", name="add_image")
-     * @Route("/profile/edit/{id}", name="edit_image")
      */
-    public function addImage(EntityManagerInterface $manager, Request $request, TagRepository $tagRepository, Image $image = NULL)
+    public function addImage(EntityManagerInterface $manager, Request $request, TagRepository $tagRepository, ImageRepository $image)
     {
-            if (!$image){
-                $image = new Image();
-            }
-            
+            $image = new Image();
+
             $user = $this->getUser();
             $selectTags = $tagRepository->findAll();
             $form = $this->createForm(ImageType::class, $image);
@@ -59,14 +57,53 @@ class UserController extends AbstractController
                 $manager->persist($image);
                 $manager->flush();
 
-                if (!$image){
-                    $this->addFlash("success","Votre image a bien été uploadé");
-                }
-                $this->addFlash("success","Votre image a bien été modifié");
+
+                $this->addFlash("success","Votre image a bien été uploadé");
+
                 return $this->redirectToRoute("user_profile");
 
             }
             return $this->render("user/add.html.twig",[
+                "form" => $form->createView(), 'tags' => $selectTags, 'image' => $image
+            ]);
+    }
+
+    /**
+     * @Route("/profile/edit/{id}", name="edit_image")
+     */
+    public function editImage(EntityManagerInterface $manager, Request $request, TagRepository $tagRepository, Image $image = NULL)
+    {
+        $this->denyAccessUnlessGranted('EDIT', $image);
+
+            $user = $this->getUser();
+            $selectTags = $tagRepository->findAll();
+            $form = $this->createForm(EditImageType::class, $image);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()){
+                /**@var UploadedFile $file */
+                $file = $form["file"]->getData();
+
+                if ($file) {
+                    $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    $newFilename = $originalFilename.'-'.uniqid().'.'.$file->guessExtension();
+
+                    $image->setName($newFilename);
+                    $image->setUser($user);
+                    $file->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                };
+
+                $manager->persist($image);
+                $manager->flush();
+
+                $this->addFlash("success","Votre image a bien été modifié");
+                return $this->redirectToRoute("user_profile");
+
+            }
+            return $this->render("user/edit.html.twig",[
                 "form" => $form->createView(), 'tags' => $selectTags, 'image' => $image
             ]);
     }
@@ -95,6 +132,9 @@ class UserController extends AbstractController
      * @Route("/profile/delete/{id}", name="delete_image")
      */
     public function delete(Image $image, EntityManagerInterface $manager){
+
+        $this->denyAccessUnlessGranted('DELETE', $image);
+
         $manager->remove($image);
         $manager->flush();
 

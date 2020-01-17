@@ -13,6 +13,11 @@
                 </div>
 {% endfor %}
 
+{{ form_start(form) }}
+{{ form_row(form.title) }}
+<button class="btn btn-primary" type="submit">Rechercher</button>
+{{ form_end(form) }}
+
 <div class="table-responsive">
     <table class="table">
         <thead class="thead-dark">
@@ -38,6 +43,12 @@
         </tbody>
     </table>
   </div>
+
+  {% if images|length <= 1 %}
+  <a class="allUser" href="{{path('admin_images')}}">
+      Toutes les images
+  </a>
+  {% endif %}
 
   <div class="navigation">
     {{ knp_pagination_render(images) }}
