@@ -120,6 +120,9 @@
     "knplabs/knp-paginator-bundle": {
         "version": "v5.0.0"
     },
+    "lorenzo/pinky": {
+        "version": "1.0.5"
+    },
     "mbezhanov/faker-provider-collection": {
         "version": "1.2.1"
     },
@@ -309,6 +312,15 @@
             "./src/Kernel.php"
         ]
     },
+    "symfony/google-mailer": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "da7b29c169c9de4359a75be96d729438129d7d86"
+        }
+    },
     "symfony/http-client": {
         "version": "v4.3.8"
     },
@@ -326,6 +338,18 @@
     },
     "symfony/intl": {
         "version": "v4.3.8"
+    },
+    "symfony/mailer": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "15658c2a0176cda2e7dba66276a2030b52bd81b2"
+        },
+        "files": [
+            "./config/packages/mailer.yaml"
+        ]
     },
     "symfony/maker-bundle": {
         "version": "1.0",
@@ -562,6 +586,18 @@
             "version": "1.0",
             "ref": "fe5a50faf580eb58f08ada2abe8afbd2d4941e05"
         }
+    },
+    "tijsverkoyen/css-to-inline-styles": {
+        "version": "2.2.2"
+    },
+    "twig/cssinliner-extra": {
+        "version": "v3.0.1"
+    },
+    "twig/extra-bundle": {
+        "version": "v3.0.1"
+    },
+    "twig/inky-extra": {
+        "version": "v3.0.1"
     },
     "twig/twig": {
         "version": "v2.12.2"

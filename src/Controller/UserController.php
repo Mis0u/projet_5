@@ -19,11 +19,12 @@ class UserController extends AbstractController
     /**
      * @Route("/profile", name="user_profile")
      */
-    public function userProfile()
+    public function userProfile(ImageRepository $imageRepository, TagRepository $tagRepository)
     {
         $user = $this->getUser();
-
-        return $this->render('user/user.html.twig', ["user"=>$user]);
+        $getAllImages = $imageRepository->findBy(['user' => $user]);
+        $test = $tagRepository->findAll()
+;        return $this->render('user/user.html.twig', ["user"=>$user, "images" => $getAllImages, 'test' => $test]);
     }
 
     /**

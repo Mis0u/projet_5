@@ -1,0 +1,15 @@
+{% apply inky_to_html|inline_css(source('@styles/email.css')) %}
+
+<div class="container">
+    <p class="logo"><img src="{{ email.image('@images/astroLogo.jpg') }}"></p>
+    <p class="title">Astro Photo</p>
+</div>
+
+<div class="content">
+    <p>Bonjour Mickaël, vous avez reçu un mail de <strong>{{ contact.name }}</strong></p>
+    <p>Email: <a href='{{ contact.email }}'>{{ contact.email }}</a> </p>
+    <p>Message :</p>
+    <p class="message"> {{ contact.message }} </p>
+</div>
+{% endapply %}
+

@@ -4,7 +4,15 @@
 {% block classBody %} search {% endblock %}
 
 {% block body %}
-{% for result in tags %}
-<p> {{ result.name }} </p>
-{% endfor %}
+    {% if searchImage|length == 0 %}
+    <p>Aucune image ne porte ce tag</p>
+    {% else %}
+        {% for result in searchImage %}
+        <p> <img src="{{ result.name }}"> </p>
+        <p> {{ result.title}} </p>
+            {% for displayTags in result.tags %}
+            <p> {{ displayTags.name}} </p>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}

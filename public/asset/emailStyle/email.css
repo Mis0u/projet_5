@@ -1,0 +1,38 @@
+    @import url('https://fonts.googleapis.com/css?family=Exo+2:500,700&display=swap');
+
+    p,a{
+        font-family: 'Exo 2', sans-serif;
+    }
+
+    body{background-color: #B6C8DD;padding: 10px;}
+
+    @keyframes slidelogo{
+        from{
+            bottom:0;
+        }
+        to{
+            bottom: -30px;
+        }
+    }
+
+    .content p {font-size: 20px;}
+
+    p.logo{
+        height: 100px;
+        width: 100px;
+        border-radius: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    p.logo img{
+        max-width: 100%;
+        position: absolute;
+        animation:slidelogo 5s linear infinite alternate !important;
+    }
+
+    .container{display: flex;align-items: center;}
+
+    .title{font-size: 44px;margin-left: 30px;}
+
+    p.message{letter-spacing: 1px;line-height: 22px;}

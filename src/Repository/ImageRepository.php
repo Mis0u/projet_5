@@ -38,8 +38,8 @@ class ImageRepository extends ServiceEntityRepository
     public function findImagesByTag($value)
     {
         return $this->createQueryBuilder('i')
-            ->leftJoin('i.tags', 'tag')
-            ->andWhere('i.tags.["name"] = :val')
+            ->join('i.tags', 'tag')
+            ->andWhere('tag.name = :val')
             ->setParameter('val', $value->getName())
             ->orderBy('i.id', 'ASC')
             ->setMaxResults(10)

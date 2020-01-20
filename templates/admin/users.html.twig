@@ -18,6 +18,10 @@
 <button class="btn btn-primary" type="submit">Rechercher</button>
 {{ form_end(form) }}
 
+{% if users|length == 0 %}
+    <p>Aucun utilisateur ne porte ce pseudo</p>
+    {% else %}
+
 <div class="table-responsive">
     <table class="table">
         <thead class="thead-dark">
@@ -40,6 +44,7 @@
         </tbody>
     </table>
   </div>
+  {% endif %}
 
   {% if users|length <= 1 %}
   <a class="allUser" href="{{path('admin_users')}}">

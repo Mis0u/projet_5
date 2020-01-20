@@ -21,10 +21,26 @@
 </aside>
 <section class="info">
     <article class="dashboard">
-        {% if user.images|length in 0..50 %}
-        <h1>Cabine de l'officier {{ user.username }} </h1>
-        {% endif %}
-        <p> Vous avez publié {{ user.images|length }} photos</p>
+        <h1> Web-astronaut :{{ user.username }} </h1>
+        <div class="images">
+            <p> Vous avez publié {{ user.images|length }} photos</p>
+            <p>Vos dernières images publiées :</p>
+            <div class="last-images">
+                {% for lastImages in user.images|slice(-3) %}
+                <img src="{{ lastImages.name }}" class="img-thumbnail">
+                {% endfor %}
+                {% for tags in images %}
+                    {% for name in tags.tags %} 
+                        {% if name.name in test %}
+                            <p>{{ name.name|unique }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+               
+            </div>
+
+        </div>
+
     </article>
     {% if is_granted('ROLE_ADMIN') %}
     <p class="admin-btn btn "><a href="{{path('admin')}}">Administration</a></p>

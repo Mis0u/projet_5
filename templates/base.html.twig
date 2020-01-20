@@ -26,7 +26,7 @@
             <p><img src="/asset/astroLogo.jpg" alt="logo astronaute espace nasa"></p>
             <ul>
                 <li><a class="homepage {% if  route== 'home' %}active{% endif %}"href="{{ path("home") }}" title="Accueil"><span>Accueil</span></a></li>
-                <li><a class="contact {% if  route== 'contact' %}active{% endif %}"href="#"title="Contact"><span>Contact</span></a></li>
+                <li><a class="contact {% if  route== 'contact' %}active{% endif %}"href="{{ path("contact") }}"title="Contact"><span>Contact</span></a></li>
                 {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
                 <li><a class="profile {% if  route== 'user_profile' %}active{% endif %}" href="{{ path("user_profile") }}" title="Tableau de bord"><span>Dashboard</span></a></li>
                 <li><a class="logout"href="{{ path("app_logout") }}"title="Logout"><span>Déconnexion</span></a></li>
