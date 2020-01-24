@@ -15,7 +15,8 @@ class SearchTagsType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 "required" => false,
-                "label" => "Rechercher"
+                "label" => "Rechercher",
+                "attr" =>[ "placeholder" => "Exemple : Lune, Mars, Météorite..."]
             ])
         ;
     }
@@ -24,6 +25,14 @@ class SearchTagsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SearchTags::class,
+            'method' => "GET",
+            'csrf_protection' => false
         ]);
+    }
+
+    
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }

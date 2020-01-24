@@ -1,53 +1,72 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2:500,700&display=swap');
 
-p,a,h1,h2,h3,h4,li,figcaption,td,th, button{
+p,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+li,
+figcaption,
+label,
+td,
+th,
+button {
     font-family: 'Exo 2', sans-serif;
 
 }
 
-@keyframes slideBg{
-    from{
+@keyframes slideBg {
+    from {
         background-position: left;
     }
-    to{
+
+    to {
         background-position: right;
     }
 }
-@keyframes slidelogo{
-    from{
-        bottom:0;
+
+@keyframes slidelogo {
+    from {
+        bottom: 0;
     }
-    to{
+
+    to {
         bottom: -30px;
     }
 }
 
 
-body{
+body {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
-.main{
+.main {
     flex: 1;
 }
 
-body:not(.home){
-    background-color: #B6C8DD;
-    height: 100vh;
+body:not(.home) {
+    min-height: 100vh;
 }
 
-body:not(.home) header{
-    background-image: url("asset/headerBg.jpg");
+.user {
+    background: radial-gradient(100% 225% at 100% 0%, #FF0000 0%, #000000 100%), linear-gradient(236deg, #00C2FF 0%, #000000 100%), linear-gradient(135deg, #CDFFEB 0%, #CDFFEB 36%, #009F9D 36%, #009F9D 60%, #07456F 60%, #07456F 67%, #0F0A3C 67%, #0F0A3C 100%);
+    background-blend-mode: overlay, hard-light, normal;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-header nav, header nav ul{
-    display:flex;
+header nav,
+header nav ul {
+    display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-header nav p{
+header nav p {
     height: 100px;
     width: 100px;
     border-radius: 100%;
@@ -56,127 +75,197 @@ header nav p{
     margin-left: 3rem;
 }
 
-header nav p img{
+header nav p img {
     max-width: 100%;
     position: absolute;
-    animation:slidelogo 5s linear infinite alternate;
+    animation: slidelogo 5s linear infinite alternate;
 }
 
-header nav ul{
+header nav ul {
     flex: 1;
 }
 
-header nav ul li{
+header nav ul li {
     list-style-type: none;
 }
 
-header nav li a{
+header nav li a {
     background-repeat: no-repeat;
     background-size: cover;
     display: block;
     height: 50px;
-    width:50px;
+    width: 50px;
     position: relative;
 }
 
-header nav li a.homepage{
+header nav li a.homepage {
     background-image: url("asset/icons/earth.svg");
 }
 
-header nav li a.register{
+header nav li a.register {
     background-image: url("asset/icons/register.svg");
 }
 
-header nav li a.connexion{
+header nav li a.connexion {
     background-image: url("asset/icons/connexion.svg");
 }
 
-header nav li a.contact{
+header nav li a.contact {
     background-image: url("asset/icons/contact.svg");
 }
 
-header nav li a.logout{
+header nav li a.logout {
     background-image: url("asset/icons/logout.svg");
 }
 
-header nav li a.profile{
+header nav li a.profile {
     background-image: url("asset/icons/dashboard.svg");
 }
 
-header nav li a span{
-    position:absolute;
-    top:50%;
-    left:0;
+header nav li a span {
+    position: absolute;
+    top: 50%;
+    left: 0;
     transform: translateY(-50%);
-    color:#FFF;
+    color: #FFF;
     text-decoration: none;
     opacity: 0;
-    transition: left 0.3s ease-in-out, opacity  0.3s ease-in-out ;
+    transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;
     filter: invert(1);
 }
 
-header nav li a:hover span, header nav li a.active span{
+header nav li a:hover span,
+header nav li a.active span {
     left: 60px;
     opacity: 1;
 }
 
 /*Homepage*/
 
-.home{
+.home {
     height: 100vh;
-    margin:0;
-    background-image:url("asset/bgHome.jpg");
-    animation:slideBg 40s linear infinite alternate;
+    margin: 0;
+    background-image: url("asset/bgHome.jpg");
+    animation: slideBg 40s linear infinite alternate;
 }
 
-header nav li a{
+header nav li a {
     filter: invert(1);
 }
 
-.home section.main{
+section.main {
     position: relative;
 }
 
-.home section.main form{
+.connexion section.main form,
+.registration section.main form,
+.home form {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: 60%;
-    opacity:0.6;
+    opacity: 0.6;
     transition: 0.3s ease-in-out;
     text-align: center;
 }
 
-.home section.main form:hover,.home section.main form:hover .btn{
+.home section.main form h1 {
+    color: #FFF;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.connexion section.main form:hover,
+.registration section.main form:hover,
+.home section.main form:hover,
+.home section.main form:hover .btn,
+.home section.main form:hover h1 {
     opacity: 1;
 }
 
-.home section.main form input{
+.home section.main form input {
     border-radius: 100px;
 }
 
-.home section.main form .btn{
+.home section.main form .btn {
     margin-top: 2em;
     opacity: 0;
     transition: 0.3s ease-in-out;
 }
 
+/*Registration Connexion*/
+
+.registration {
+    background-image: url("/asset/registration.jpg");
+    background-size: cover;
+}
+
+.registration form,
+.connexion form {
+    text-align: left !important;
+    top: 40% !important;
+}
+
+.registration form .btn {
+    background-color: #c76924;
+    border-color: #efce8b;
+}
+
+.registration form label,
+.connexion form label {
+    color: #FFF;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.registration form small,
+.connexion form small {
+    color: #FFF !important;
+    font-size: 90%;
+}
+
+.registration form button,
+.connexion form button {
+    position: absolute;
+    bottom: -51px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #FFF
+}
+
+.connexion form h1,
+.registration form h1 {
+    color: #FFF;
+    text-align: center;
+}
+
+.connexion {
+    background-image: url("/asset/connexion.jpg");
+    background-size: cover;
+}
+
+.connexion form .btn {
+    background-color: #000;
+    border-color: #e5a3a4;
+    bottom: -61px !important;
+}
+
 /*UserProfile*/
 
-.userProfile{
+.userProfile {
     background-image: url("/asset/dashboard.jpg");
     background-size: cover;
 }
 
-.userProfile .main{
+.userProfile .main {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
 }
 
-.userProfile .info{
+.userProfile .info {
     background: rgba(27, 111, 132, 0.58);
     height: 500px;
     border-radius: 50px;
@@ -185,42 +274,44 @@ header nav li a{
     position: relative;
 }
 
-.userProfile .info h1, .userProfile .info p{
-    color:#fff;
+.userProfile .info h1,
+.userProfile .info p {
+    color: #fff;
     text-align: center;
 }
 
-.userProfile p.btn{
+.userProfile p.btn {
     position: absolute;
     bottom: 0;
     right: 50%;
     transform: translateX(50%);
-    background:#62CB8E;
+    background: #62CB8E;
 }
 
-.userProfile p.btn a, .userProfile p.btn a:hover{
-    color:#FFF;
+.userProfile p.btn a,
+.userProfile p.btn a:hover {
+    color: #FFF;
     text-decoration: none;
 }
 
-.userProfile article.dashboard img{
+.userProfile article.dashboard img {
     border: 0;
-    padding:1px;
+    padding: 1px;
     height: auto;
     max-height: 150px;
 }
 
-.userProfile article.dashboard .images{
+.userProfile article.dashboard .images {
     display: flex;
     flex-direction: column;
 }
 
-.userProfile article.dashboard .last-images{
+.userProfile article.dashboard .last-images {
     display: flex;
     justify-content: space-evenly;
 }
 
-.userProfile aside{
+.userProfile aside {
     height: 100%;
     width: 200px;
     top: 0;
@@ -228,19 +319,20 @@ header nav li a{
     left: -200px;
     position: absolute;
     transition: left 0.3s ease-in-out;
-    background-image:linear-gradient(to bottom, #9fadbd, #adb1c5, #bdb5c9, #cdb9cb, #dcbeca);
+    background-image: linear-gradient(to bottom, #9fadbd, #adb1c5, #bdb5c9, #cdb9cb, #dcbeca);
     border-radius: 0 20px 20px 0;
 }
 
-.userProfile aside .content, .userProfile aside ul{
+.userProfile aside .content,
+.userProfile aside ul {
     height: 100%;
 }
 
-.userProfile aside ul{
+.userProfile aside ul {
     padding-top: 20px;
 }
 
-.userProfile aside img{
+.userProfile aside img {
     max-width: 100%;
     height: 45px;
     position: absolute;
@@ -250,21 +342,21 @@ header nav li a{
     cursor: pointer;
 }
 
-.userProfile aside.active{
-    left:0;
+.userProfile aside.active {
+    left: 0;
 }
 
-.userProfile aside li{
+.userProfile aside li {
     position: relative;
     list-style: none;
     margin: 20px 0;
 }
 
-.userProfile aside li:before{
+.userProfile aside li:before {
     position: absolute;
-    content:"";
+    content: "";
     top: 0;
-    left:-40px;
+    left: -40px;
     width: 20%;
     height: 100%;
     transform: rotateY(175deg);
@@ -272,96 +364,185 @@ header nav li a{
     background-repeat: no-repeat;
 }
 
-.userProfile aside li:hover:before{
+.userProfile aside li:hover:before {
     background-image: url("/asset/icons/r2d2Color.svg");
 }
 
-/*User Images*/
+/*User add and edit Images*/
 
-.userImages .container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-    grid-gap: 30px;
+.user .card h5 {
+    padding: 8px 8px 0 8px;
+    font-weight: 400;
+    color: #fff;
 }
 
-.userImages .card{
-    height:fit-content;
+.user .card {
+    border:0;
+   background-image:linear-gradient(to bottom, #000095, #000183, #000271, #000260, #00004f)
+}
+
+.user section.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.user section.main .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.user section.main h1 {
+    color: #FFF;
+}
+
+.user section.main label {
+    color: #FFF;
+}
+
+.user section.main .btn {
+    width: 100%;
+}
+
+/*User Display Images*/
+
+.userImages a:hover{
+    text-decoration: none;
+    color: #00dde1;
+}
+
+.userImages .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+    grid-gap: 30px;
+    justify-content: center;
+}
+
+.userImages .card {
+    height: fit-content;
     position: relative;
     overflow: hidden;
 }
 
-.userImages .card .delete{
+.userImages .card h5{
+    font-size: 15px;
+    text-align: center;
+}
+
+.userImages .card .delete {
     position: absolute;
     top: 10px;
     right: -100px;
-    transition:right 0.3s ease-in-out;
+    transition: right 0.3s ease-in-out;
 }
 
-.userImages .card:hover .delete{
+.userImages .card .delete img, .userImages .card .edit img{
+    max-width: 100%;
+    height: 45px;
+}
+
+.userImages .card:hover .delete {
     right: 10px;
 }
 
-.userImages .card .edit{
+.userImages .card .edit {
     position: absolute;
     top: 10px;
     left: -100px;
-    transition:left 0.3s ease-in-out;
+    transition: left 0.3s ease-in-out;
 }
 
-.userImages .card:hover .edit{
+.userImages .card:hover .edit {
     left: 10px;
 }
 
-.select2-container{
-    width:570px !important;
+.userImages .card-body{
+    text-align: center;
+}
+
+.select2-container {
+    width: 570px !important;
+}
+
+.userImages p.return{
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+}
+
+.userImages p.return img{
+    max-width: 100%;
+    height: 70px;
+}
+
+.userImages section.main h3{
+    color:#FFF;
+    margin: 40px 0;
 }
 
 /*ADMIN*/
 
-.adminProfile .container{
+.adminProfile .container {
     display: flex;
     height: 100%;
     align-items: center;
     justify-content: center;
 }
 
-.adminProfile .container figure{
+.adminProfile .container figure {
     width: 100%;
     text-align: center;
 }
 
-.adminProfile .container figure img{
+.adminProfile .container figure img {
     max-width: 100%;
     height: 370px;
 }
 
-.adminProfile .container figcaption{
+.adminProfile .container figcaption {
     font-family: 'Exo 2', sans-serif;
     font-weight: 700;
 }
+
 /*Contact*/
 
 .contact section.main {
-    display:flex;
+    display: flex;
     width: 100%;
 }
 
-.contact section.main .form, .contact section.main .bg{
-    width:50%;
+.contact section.main .form,
+.contact section.main .bg {
+    width: 50%;
     position: relative;
 }
 
-.contact .contact-img img{
+.contact .contact-img img {
     max-width: 100%;
     height: auto;
 }
 
-.contact section.main form h1{
-    text-align:center;
+.contact section.main form h1 {
+    text-align: center;
 }
 
-.contact section.main form .btn{
+.contact section.main form .btn {
     position: absolute;
-    left:50%;
+    left: 50%;
     transform: translateX(-50%);
+}
+
+footer{
+    margin-top: 50px;
+}
+
+footer p {
+    text-align: center;
+    color: #FFF
+}
+
+footer p a {
+    color: #FFF;
+    text-decoration: none;
 }

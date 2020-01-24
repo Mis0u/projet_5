@@ -26,10 +26,10 @@
                 <span><a href="{{ path('display_images_tags', {'name': tags.name }) }}">#{{ tags.name }}</a></span>
            {% endfor %}
            {% if is_granted('DELETE', image) %}
-           <a href="{{ path('delete_image', {'id': image.id}) }}" class="delete" onclick="return confirm('Confirmer la suppression')" title="Supprimer l'image"><img src="/asset/icons/delete.png"></a>
+           <a href="{{ path('delete_image', {'id': image.id}) }}" class="delete" onclick="return confirm('Confirmer la suppression')" title="Supprimer l'image"><img src="/asset/icons/delete.svg"></a>
            {% endif %}
            {% if is_granted('EDIT', image) %}
-           <a href="{{ path('edit_image', {'id': image.id}) }}" class="edit" title="Modifier l'image"><img src="/asset/icons/edit.png"></a>
+           <a href="{{ path('edit_image', {'id': image.id}) }}" class="edit" title="Modifier l'image"><img src="/asset/icons/edit.svg"></a>
            {% endif %}
         </div>
     </div>

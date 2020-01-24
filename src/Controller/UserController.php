@@ -125,8 +125,8 @@ class UserController extends AbstractController
     public function displayImagesTags(Tag $tag, ImageRepository $imageRepository)
     {  
         $user = $this->getUser();
-        $getAllImages = $imageRepository->findBy(['user' => $user]);
-        return $this->render("user/imagesFromTags.html.twig", ["tag" => $tag, "images" => $getAllImages]);
+        $getAllImages = $imageRepository->findUserImagesByTag($tag, $user);
+        return $this->render("user/imagesFromTags.html.twig", ["images" => $getAllImages, 'tag' => $tag]);
     }
 
     /**

@@ -7,22 +7,39 @@
 
 {% block body %}
 
+<h3>Vous avez {{ images|length }} images contenant le tag "{{ tag.name }}"</h3>
+
 <div class = "container">
-
     {% for image in images %}
-        {% for tags in image.tags %}
-            {% if tags.name == tag %}
-                <img src="{{ image.name }}">
-            {% endif %}
-
-        {% endfor %}
+            
+                <div class="card">
+                <a href="{{ image.name }}" data-lightbox="user-image" data-title="{{ image.title }}">
+                    <img class="card-img-top" src= "{{ image.name }}">
+                </a>
+                <h5> {{ image.title }} </h5>
+                <div class="card-body">
+                    {% for tags in image.tags %} 
+                    <span><a href="{{ path('display_images_tags', {'name': tags.name }) }}">#{{ tags.name }}</a></span>              
+                    {% endfor %}
+                {% if is_granted('DELETE', image) %}
+                <a href="{{ path('delete_image', {'id': image.id}) }}" class="delete" onclick="return confirm('Confirmer la suppression')" title="Supprimer l'image"><img src="/asset/icons/delete.svg"></a>
+                {% endif %}
+                {% if is_granted('EDIT', image) %}
+                <a href="{{ path('edit_image', {'id': image.id}) }}" class="edit" title="Modifier l'image"><img src="/asset/icons/edit.svg"></a>
+                {% endif %}
+                </div>
+            </div>
+        
     {% endfor %}
 
 
 </div>
 
+<p class="return"><a href="{{ path('display_images') }}"><img src="/asset/icons/return.svg" title="retour"> Retour</a></p>
+
 {% endblock %}
 
 {% block javascript %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+
 {% endblock %}

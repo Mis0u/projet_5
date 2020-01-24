@@ -6,7 +6,7 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 {% endblock %}
 
-{% block classBody %}userProfile user{% endblock %}
+{% block classBody %}userProfile{% endblock %}
 
 
 {% block body %}
@@ -29,14 +29,7 @@
                 {% for lastImages in user.images|slice(-3) %}
                 <img src="{{ lastImages.name }}" class="img-thumbnail">
                 {% endfor %}
-                {% for tags in images %}
-                    {% for name in tags.tags %} 
-                        {% if name.name in test %}
-                            <p>{{ name.name|unique }}</p>
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-               
+                
             </div>
 
         </div>

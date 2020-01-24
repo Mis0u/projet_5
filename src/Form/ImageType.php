@@ -22,10 +22,10 @@ class ImageType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Quel sera le titre de l\'image ?'
+                'label' => 'Ensuite le titre '
             ])
             ->add('file', FileType::class, [
-                'label' => 'Ajouter une image',
+                'label' => 'D\'abord l\'image',
                 'required' => false,
                 'help' => "Maximum 2Mo (jpg, png, jpeg)"
             ])

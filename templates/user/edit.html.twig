@@ -5,6 +5,8 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 {% endblock %}
 
+{% block classBody %}user editImage{% endblock %}
+
 {% block body %}
 
 {% set formArray = form.tags.vars.value|split(',') %}

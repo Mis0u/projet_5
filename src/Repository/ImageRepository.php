@@ -47,6 +47,22 @@ class ImageRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findUserImagesByTag($value, $user)
+    {
+        return $this->createQueryBuilder('i')
+            ->join('i.tags', 'tag')
+            ->join('i.user','user')
+            ->andWhere('tag.name = :val')
+            ->setParameter('val', $value->getName())
+            ->andWhere('i.user = :userId')
+            ->setParameter('userId', $user)
+            ->orderBy('i.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 
     /*

@@ -5,6 +5,7 @@
 {% block classBody %}home {% endblock %}
 {% block body %}
     {{ form_start(form) }}
+    <h1>Rechercher une image</h1>
     {{ form_widget(form.name) }}
     <button type = "submit" class="btn btn-info">Rechercher</button>
     {{ form_end(form) }}

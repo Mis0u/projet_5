@@ -5,6 +5,8 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 {% endblock %}
 
+{% block classBody %}user addImage{% endblock %}
+
 {% block body %}
 
 <h1>Ajout d'une image :</h1>
@@ -14,13 +16,13 @@
 {{ form_row(form.file) }}
 {{ form_row(form.title) }}
 <div class="form-group">
-    <label for="image_allTags">Ajouter vos tags</label>
+    <label for="image_allTags">Et enfin le(s) tag(s)</label>
     <select id="image_allTags" required="required" class="form-control" multiple=""  tabindex="-1" aria-hidden="true">
     {% for tag in tags %}
     <option value="{{ tag.id }}">{{ tag.name }}</option>
     {% endfor %}
     </select>
-   
+   <small class="form-text text-muted">Psssst, vous pouvez même en créer un vous mêmes !</small>
 </div>
 
 {{ form_row(form.tags) }}

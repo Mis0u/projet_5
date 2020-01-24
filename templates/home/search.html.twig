@@ -4,9 +4,14 @@
 {% block classBody %} search {% endblock %}
 
 {% block body %}
+{{ form_start(form) }}
+    {{ form_widget(form.name) }}
+    <button type = "submit" class="btn btn-info">Rechercher</button>
+    {{ form_end(form) }}
     {% if searchImage|length == 0 %}
     <p>Aucune image ne porte ce tag</p>
     {% else %}
+    
         {% for result in searchImage %}
         <p> <img src="{{ result.name }}"> </p>
         <p> {{ result.title}} </p>
