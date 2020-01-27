@@ -42,7 +42,6 @@ class ImageRepository extends ServiceEntityRepository
             ->andWhere('tag.name = :val')
             ->setParameter('val', $value->getName())
             ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
@@ -58,7 +57,6 @@ class ImageRepository extends ServiceEntityRepository
             ->andWhere('i.user = :userId')
             ->setParameter('userId', $user)
             ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;

@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello AdminController!{% endblock %}
-{% block classBody %} search {% endblock %}
+{% block classBody %} search userImages {% endblock %}
+{% block stylesheets %}<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">{% endblock %}
+
 
 {% block body %}
 {{ form_start(form) }}
@@ -11,13 +13,29 @@
     {% if searchImage|length == 0 %}
     <p>Aucune image ne porte ce tag</p>
     {% else %}
-    
+    <h3>Il y a {{  searchImage|length}} images correspondant à <span class="imgSearch">{{ research.name|upper }}</span> </h3>
+    <div class="container">
+
         {% for result in searchImage %}
-        <p> <img src="{{ result.name }}"> </p>
-        <p> {{ result.title}} </p>
+       
+<div class="card">
+    <a href="{{ result.name }}" data-lightbox="search-image" data-title="{{ result.title }}">
+        <img class="card-img-top" src= "{{ result.name }}">
+    </a>
+    <h5> {{ result.title }} </h5>
+    <div class="card-body">
             {% for displayTags in result.tags %}
-            <p> {{ displayTags.name}} </p>
+            <span><a href="{{ path('home', {'name': displayTags.name }) }}">#{{ displayTags.name }}</a></span>
             {% endfor %}
+        </div>
+    </div>
         {% endfor %}
+
+
     {% endif %}
+    {% block javascript %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+    
+    {% endblock %}
+    
 {% endblock %}

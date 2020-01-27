@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Image;
 use App\Entity\SearchTags;
 use App\Form\SearchTagsType;
 use App\Repository\ImageRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends AbstractController
 {
@@ -24,8 +23,8 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $SearchImage = $imageRepo->findImagesByTag($research);
-            return $this->render('home/search.html.twig', ['searchImage' => $SearchImage, 'form' => $form->createView()]);
+            $searchImage = $imageRepo->findImagesByTag($research);
+            return $this->render('home/search.html.twig', ['searchImage' => $searchImage, 'form' => $form->createView(), 'research' => $research]);
         }
 
         return $this->render('home/index.html.twig',['form' => $form->createView()]);

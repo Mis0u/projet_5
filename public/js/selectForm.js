@@ -5,7 +5,7 @@ $(document).ready(function(){
         tokenSeparators: [',', ' ']
     });
 
-    $('form[name=image]').on('submit', function(){
+    $('form').on('submit', function(){
         let getTags = $('#image_allTags').select2('data').map(function(tag){
             return tag.text
         }).join(",");

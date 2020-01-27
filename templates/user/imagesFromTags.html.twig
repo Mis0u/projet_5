@@ -35,6 +35,10 @@
 
 </div>
 
+<div class="navigation">
+    {{ knp_pagination_render(images) }}
+</div>
+
 <p class="return"><a href="{{ path('display_images') }}"><img src="/asset/icons/return.svg" title="retour"> Retour</a></p>
 
 {% endblock %}

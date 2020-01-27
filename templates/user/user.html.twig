@@ -16,14 +16,15 @@
         <ul>
             <li><a href="{{ path('add_image') }}">Ajouter une image</a></li>
             <li><a href="{{ path('display_images') }}">Afficher mes images</a></li>
+            <li><a href="{{ path('cloud_tags') }}">Nuage de tags</a></li>
         </ul>
     </div>
 </aside>
 <section class="info">
     <article class="dashboard">
-        <h1> Web-astronaut :{{ user.username }} </h1>
+        <h1> Bonjour {{ user.username }} </h1>
         <div class="images">
-            <p> Vous avez publié {{ user.images|length }} photos</p>
+            <p> Vous avez publié {{ user.images|length }} images</p>
             <p>Vos dernières images publiées :</p>
             <div class="last-images">
                 {% for lastImages in user.images|slice(-3) %}
@@ -32,6 +33,10 @@
                 
             </div>
 
+        </div>
+        <div >
+            <h2>Anecdotes spatiale</h2>
+            <p id="anecdotes"></p>
         </div>
 
     </article>
@@ -43,4 +48,6 @@
 
 {% block javascript %}
 <script src="/js/moveAside.js"></script>
+<script src="/js/anecdote.js"></script>
+<script src="/js/main.js"></script>
 {% endblock %}

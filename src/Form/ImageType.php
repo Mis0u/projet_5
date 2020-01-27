@@ -26,7 +26,7 @@ class ImageType extends AbstractType
             ])
             ->add('file', FileType::class, [
                 'label' => 'D\'abord l\'image',
-                'required' => false,
+                'required' => true,
                 'help' => "Maximum 2Mo (jpg, png, jpeg)"
             ])
 

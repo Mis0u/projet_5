@@ -10,3 +10,18 @@
     <button type = "submit" class="btn btn-info">Rechercher</button>
     {{ form_end(form) }}
 {% endblock %}
+
+{% block javascript %}
+<script>
+    $('form input').on("click",function(){
+        $('form').addClass('appear');
+
+    })
+    $('body').on("mouseup",function(){
+        $('form').removeClass('appear');
+
+    })
+</script>
+
+{% endblock %}
+

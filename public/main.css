@@ -37,6 +37,38 @@ button {
     }
 }
 
+/*START PAGINATION*/
+
+.pagination{
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+div.navigation{
+    margin-top: 50px;
+    width: 100%;
+}
+
+.pagination .page-item.disabled .page-link,.pagination .page-item .page-link{
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #007bff;
+    margin-left: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+.pagination .page-item.disabled .page-link:hover,.pagination .page-item .page-link:hover,
+.pagination .page-item.active .page-link, .pagination .page-item.active .page-link:hover{
+    color:#00dde1
+}
+
+.pagination .page-item.active .page-link{
+    border-bottom: 1px solid;
+}
+
+
+/*END*/
+
 
 body {
     display: flex;
@@ -57,6 +89,11 @@ body:not(.home) {
     background-blend-mode: overlay, hard-light, normal;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+body:not(.home) header{
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    margin-bottom: 20px;
 }
 
 header nav,
@@ -159,7 +196,8 @@ section.main {
 
 .connexion section.main form,
 .registration section.main form,
-.home form {
+.home form , 
+.contact form{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -170,18 +208,20 @@ section.main {
     text-align: center;
 }
 
-.home section.main form h1 {
+.home section.main form h1 , .contact form h1{
     color: #FFF;
     opacity: 0;
     transition: 0.3s ease-in-out;
 }
 
-.connexion section.main form:hover,
-.registration section.main form:hover,
-.home section.main form:hover,
-.home section.main form:hover .btn,
-.home section.main form:hover h1 {
-    opacity: 1;
+section.main form:hover,
+section.main form:hover .btn,
+section.main form:hover h1,
+section.main form.appear,
+section.main form.appear .btn,
+section.main form.appear h1
+{
+    opacity: 1 !important;
 }
 
 .home section.main form input {
@@ -192,6 +232,39 @@ section.main {
     margin-top: 2em;
     opacity: 0;
     transition: 0.3s ease-in-out;
+}
+
+.search{
+    background: linear-gradient(120deg, #4B0000 0%, #000000 100%), linear-gradient(300deg, #1E0000 0%, #0038FF 100%, #0038FF 100%), linear-gradient(65deg, #00FFFF 0%, #FF00A8 100%), linear-gradient(185deg, #FF0000 10%, #1400FF 95%), radial-gradient(100% 140% at 100% 0%, #00A3FF 0%, #C10097 100%);
+    background-blend-mode: color-dodge, overlay, difference, color-dodge, normal;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.search h3{
+    text-align: center;
+}
+
+.search form{
+    margin: 40px auto;
+    width: 50%;
+    display: flex;
+    position: sticky;
+    top:5px;
+    z-index: 999;
+}
+.search form input, .search form .btn{
+    margin-right: 30px;
+    box-shadow:
+  0 1.7px 1.4px rgba(0, 0, 0, 0.016),
+  0 3.9px 3.1px rgba(0, 0, 0, 0.023),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+  0 10.3px 8.2px rgba(0, 0, 0, 0.033),
+  0 15.2px 12.2px rgba(0, 0, 0, 0.037),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+  0 33.5px 26.8px rgba(0, 0, 0, 0.047),
+  0 53.4px 42.7px rgba(0, 0, 0, 0.054),
+  0 100px 80px rgba(0, 0, 0, 0.07)
 }
 
 /*Registration Connexion*/
@@ -213,10 +286,13 @@ section.main {
 }
 
 .registration form label,
-.connexion form label {
+.connexion form label,
+.contact form label {
     color: #FFF;
     font-weight: 700;
     font-size: 20px;
+    text-align: left;
+    width: 100%;
 }
 
 .registration form small,
@@ -251,6 +327,11 @@ section.main {
     bottom: -61px !important;
 }
 
+.invalid-feedback{
+    color: #FFF;
+    background-color: #dc3545;
+}
+
 /*UserProfile*/
 
 .userProfile {
@@ -275,6 +356,7 @@ section.main {
 }
 
 .userProfile .info h1,
+.userProfile .info h2,
 .userProfile .info p {
     color: #fff;
     text-align: center;
@@ -304,6 +386,7 @@ section.main {
 .userProfile article.dashboard .images {
     display: flex;
     flex-direction: column;
+    padding: 20px 0;
 }
 
 .userProfile article.dashboard .last-images {
@@ -373,12 +456,12 @@ section.main {
 .user .card h5 {
     padding: 8px 8px 0 8px;
     font-weight: 400;
-    color: #fff;
+    color: #000;
 }
 
 .user .card {
     border:0;
-   background-image:linear-gradient(to bottom, #000095, #000183, #000271, #000260, #00004f)
+   background-color: #FFF;
 }
 
 .user section.main {
@@ -467,7 +550,7 @@ section.main {
 
 .userImages p.return{
     position: fixed;
-    bottom: 20px;
+    bottom: 40px;
     left: 0;
 }
 
@@ -479,6 +562,36 @@ section.main {
 .userImages section.main h3{
     color:#FFF;
     margin: 40px 0;
+}
+
+/*CLOUD TAGS*/
+
+.cloudTags .main{
+    display: grid !important;
+    grid-template-columns: repeat(4,1fr);
+    justify-items: center;
+    grid-gap: 50px;
+}
+
+.cloudTags h1{
+    grid-column: 1/5;
+}
+
+.cloudTags figure{
+    position: relative;
+}
+.cloudTags figure figcaption{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #FFF;
+    font-weight: 700;
+}
+
+.cloudTags figure img{
+    max-width: 100%;
+    height: 120px;
 }
 
 /*ADMIN*/
@@ -507,34 +620,15 @@ section.main {
 
 /*Contact*/
 
-.contact section.main {
-    display: flex;
-    width: 100%;
-}
-
-.contact section.main .form,
-.contact section.main .bg {
-    width: 50%;
-    position: relative;
-}
-
-.contact .contact-img img {
-    max-width: 100%;
-    height: auto;
-}
-
-.contact section.main form h1 {
-    text-align: center;
-}
-
-.contact section.main form .btn {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+.contact{
+    background-image: url("/asset/contactForm.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
 }
 
 footer{
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 footer p {

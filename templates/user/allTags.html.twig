@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block classBody %}user cloudTags{% endblock %}
+
+{% block body %}
+<h1>Nuage de tags</h1>
+
+{% for tags in cloud %}
+
+<figure> 
+     
+    <a href="{{ path('home', {'name': tags.name }) }}"><img class="planet" src="/asset/icons/mars.svg">
+    <figcaption>
+        {{ tags.name }}
+    </figcaption>
+</a>
+</figure>
+
+{% endfor %}
+{% endblock %}
+{% block javascript %}
+<script>
+    let planet = document.querySelectorAll(".planet");
+        planet.forEach( function(test){
+            let hueRotateNumber = Math.round(Math.random() * 2000);
+            let sepiaNumber = Math.round(Math.random() * 100);
+            test.style.filter="invert(10%) sepia(" + sepiaNumber + "%) saturate(563%) hue-rotate("+ hueRotateNumber + "deg) brightness(90%) contrast(100%)"
+        })
+        
+</script>
+{% endblock %}

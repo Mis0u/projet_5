@@ -9,6 +9,7 @@ use App\Form\EditImageType;
 use App\Repository\TagRepository;
 use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -72,7 +73,7 @@ class UserController extends AbstractController
     /**
      * @Route("/profile/edit/{id}", name="edit_image")
      */
-    public function editImage(EntityManagerInterface $manager, Request $request, TagRepository $tagRepository, Image $image = NULL)
+    public function editImage(EntityManagerInterface $manager, Request $request, TagRepository $tagRepository, Image $image)
     {
         $this->denyAccessUnlessGranted('EDIT', $image);
 
@@ -101,7 +102,7 @@ class UserController extends AbstractController
                 $manager->flush();
 
                 $this->addFlash("success","Votre image a bien été modifié");
-                return $this->redirectToRoute("user_profile");
+                return $this->redirectToRoute("display_images");
 
             }
             return $this->render("user/edit.html.twig",[
@@ -122,10 +123,11 @@ class UserController extends AbstractController
     /**
      * @Route("/profile/tags/{name}", name="display_images_tags")
      */
-    public function displayImagesTags(Tag $tag, ImageRepository $imageRepository)
+    public function displayImagesTags(Tag $tag, ImageRepository $imageRepository, PaginatorInterface $pi, Request $request)
     {  
         $user = $this->getUser();
-        $getAllImages = $imageRepository->findUserImagesByTag($tag, $user);
+        $getAllImages = $pi->paginate($imageRepository->findUserImagesByTag($tag, $user),$request->query->getInt('page', 1), 
+        10 );
         return $this->render("user/imagesFromTags.html.twig", ["images" => $getAllImages, 'tag' => $tag]);
     }
 
@@ -141,6 +143,16 @@ class UserController extends AbstractController
 
         $this->addFlash("success_delete","Votre image a bien été supprimé");
         return $this->redirectToRoute("display_images");
+    }
+
+    /**
+     * @Route("/profile/tags", name="cloud_tags")
+     */
+    public function allTags(TagRepository $tagRepo)
+    {
+        $allTags = $tagRepo->findAll();
+        return $this->render("user/allTags.html.twig", ["cloud" => $allTags]);
+
     }
 
 }

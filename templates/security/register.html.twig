@@ -24,4 +24,16 @@
 {% block javascript %}
 <script src="/js/errors.js"></script>
 <script src="/js/main.js"></script>
+<script>
+    $('form input').on("click",function(){
+        $('form').addClass('appear');
+        $('form h1').addClass('appear');
+        $('form .btn').addClass('appear');
+    })
+    $('body').on("mouseup",function(){
+        $('form').removeClass('appear');
+        $('form h1').removeClass('appear');
+        $('form .btn').removeClass('appear');
+    })
+</script>
 {% endblock %}

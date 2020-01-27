@@ -48,4 +48,20 @@
         Connexion
     </button>
 </form>
+
+{% block javascript %}
+<script>
+    $('form input').on("click",function(){
+        $('form').addClass('appear');
+        $('form h1').addClass('appear');
+        $('form .btn').addClass('appear');
+    })
+    $('body').on("mouseup",function(){
+        $('form').removeClass('appear');
+        $('form h1').removeClass('appear');
+        $('form .btn').removeClass('appear');
+    })
+</script>
 {% endblock %}
+{% endblock %}
+
