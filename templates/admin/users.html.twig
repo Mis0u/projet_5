@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello AdminController!{% endblock %}
-{% block classBody %} adminUsers {% endblock %}
+{% block classBody %} adminUsers admin {% endblock %}
 
 
 {% block body %}
@@ -47,12 +47,14 @@
   {% endif %}
 
   {% if users|length <= 1 %}
-  <a class="allUser" href="{{path('admin_users')}}">
-      Tout les utilisateurs
-  </a>
+  <p class="back-all">  <a class="allUser" href="{{path('admin_users')}}">
+    Tout les utilisateurs
+</a></p>
   {% endif %}
 
   <div class="navigation">
+    <span class="return"><a href="{{ path('admin') }}"><img src="/asset/icons/return.svg" title="retour"> Retour à l'admin</a></span>
+
     {{ knp_pagination_render(users) }}
 </div>
 {% endblock %}

@@ -15,7 +15,7 @@ class SearchImagesType extends AbstractType
         $builder
             ->add('title', TextType::class,[
                 'required' => false,
-                'label' => "Recherche une image"
+                'label' => "Recherche une image (titre)"
             ])
         ;
     }
@@ -24,6 +24,14 @@ class SearchImagesType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SearchImages::class,
+            'method' => "GET",
+            'csrf_protection' => false
         ]);
+    }
+
+    
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }

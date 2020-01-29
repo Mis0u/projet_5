@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello AdminController!{% endblock %}
-{% block classBody %} adminImages {% endblock %}
+{% block classBody %} adminImages admin {% endblock %}
 
 
 {% block body %}
@@ -49,13 +49,16 @@
   </div>
   {% endif %}
 
-  {% if images|length <= 1 %}
-  <a class="allUser" href="{{path('admin_images')}}">
+  {% if images|length <= 10 %}
+  <p class="back-all">
+      <a class="allImg" href="{{path('admin_images')}}">
       Toutes les images
   </a>
+</p>
   {% endif %}
 
   <div class="navigation">
+    <span class="return"><a href="{{ path('admin') }}"><img src="/asset/icons/return.svg" title="retour"> Retour à l'admin</a></span>
     {{ knp_pagination_render(images) }}
 </div>
 

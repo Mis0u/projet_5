@@ -24,6 +24,14 @@ class SearchUsersType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SearchUsers::class,
+            'method' => "GET",
+            'csrf_protection' => false
         ]);
+    }
+
+    
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }

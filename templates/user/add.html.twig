@@ -32,9 +32,14 @@
 {{ form_end(form) }}
 
 
+<img class="check-title" src="{{ asset('asset/icons/alien-title-add-image-control.png') }}">
+
 {% endblock %}
 
 {% block javascript %}
+
+<script src="/js/formAddTitleImageValidation.js"></script>
+
 
     <script>
         $('.custom-file-input').on('change', function(event)
@@ -48,6 +53,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
-    <script src="/js/selectForm.js"></script>
+    <script src="/js/selectFormAddImage.js"></script>
 
 {% endblock %}

@@ -19,11 +19,15 @@
     {{ form_errors(form.plainPassword.second)}}
     <button type="submit" class="btn">Inscription</button>
 {{ form_end(form) }}
+
+<img class="check-name" src="{{ asset('asset/icons/alien-name-register-control.png') }}">
+<img class="check-password" src="{{ asset('asset/icons/alien-password-register-control.png') }}">
+
 {% endblock %}
 
 {% block javascript %}
-<script src="/js/errors.js"></script>
-<script src="/js/main.js"></script>
+<script src="/js/formRegisterValidation.js"></script>
+
 <script>
     $('form input').on("click",function(){
         $('form').addClass('appear');

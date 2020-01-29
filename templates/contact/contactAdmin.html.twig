@@ -25,6 +25,10 @@
 
 {{ form_end(form) }}
 </div>
+
+<img class="check-email" src="{{ asset('asset/icons/alien-email-control.png') }}">
+<img class="check-name" src="{{ asset('asset/icons/alien-name-control.png') }}">
+
 {% endblock %}
 {% block javascript %}
 <script>
@@ -37,5 +41,7 @@
 
     })
 </script>
+
+<script src="/js/formContactValidation.js"></script>
 
 {% endblock %}

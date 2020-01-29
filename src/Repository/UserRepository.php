@@ -26,7 +26,7 @@ class UserRepository extends ServiceEntityRepository
         $req = $this->createQueryBuilder("u");
         if ($searchUsers->getUsername()){
             $req = $req ->andWhere('u.username = :name')
-            ->setParameter(':name', $searchUsers->getUsername());
+            ->setParameter('name', $searchUsers->getUsername());
         }
                 
         return $req->getQuery();

@@ -26,7 +26,7 @@ class ImageRepository extends ServiceEntityRepository
         $req = $this->createQueryBuilder("i");
         if ($searchImages->getTitle()){
             $req = $req->andWhere('i.title = :title')
-            ->setParameter(':title', $searchImages->getTitle());
+            ->setParameter('title', $searchImages->getTitle());
         }
         return $req->getQuery();
     }

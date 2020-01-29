@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mime\NamedAddress;
 
 class ContactController extends AbstractController
 {
@@ -24,7 +25,7 @@ class ContactController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             $email = (new TemplatedEmail())
-            ->from($contact->getEmail())
+            ->from(new NamedAddress($contact->getEmail(), $contact->getName()))
             ->to('misiti.mickael@gmail.com')
 
             ->subject('Formulaire de contact')
