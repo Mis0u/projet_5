@@ -34,6 +34,9 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     *@Assert\Length(min=8,minMessage="Minimum 8 caractères")
+     */
     private $plainPassword;
 
     /**

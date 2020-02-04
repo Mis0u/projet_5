@@ -37,6 +37,20 @@ button {
     }
 }
 
+@keyframes circle{
+    0%{
+      transform:rotate(0deg)
+                translate(-5px)
+                rotate(0deg);
+    
+    }
+    100%{
+      transform:rotate(360deg)
+                translate(-5px)
+                rotate(-360deg);
+    }
+  }
+
 /*START PAGINATION*/
 
 .pagination{
@@ -65,8 +79,6 @@ div.navigation{
 .pagination .page-item.active .page-link{
     border-bottom: 1px solid;
 }
-
-
 /*END*/
 
 
@@ -101,6 +113,8 @@ header nav ul {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    padding:0;
+    margin: 0;
 }
 
 header nav p {
@@ -120,6 +134,34 @@ header nav p img {
 
 header nav ul {
     flex: 1;
+}
+
+header nav div.hamburger{
+    display: none !important;
+    position: absolute;
+    right: 20px;
+    width: 32px;
+    height: 27px;
+    bottom: 50%;
+    transform: translateY(60%);
+}
+
+nav .line{
+    width: 32px;
+    height: 2px;
+    background-color: #FFF;
+    position: absolute;
+    transform: rotate(0);
+    opacity: 1;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out 0.03s;
+}
+
+nav .line2{
+    top:11px
+}
+
+nav .line3{
+    top:22px
 }
 
 header nav ul li {
@@ -267,6 +309,21 @@ section.main form.appear h1
   0 100px 80px rgba(0, 0, 0, 0.07)
 }
 
+.no-result{
+    text-align: center;
+}
+
+.no-result img{
+    max-width: 100%;
+    height: 300px;
+}
+
+.no-result p{
+    color: #FFF;
+    font-size: 25px;
+    letter-spacing: 1px;
+}
+
 /*Registration Connexion*/
 
 .registration {
@@ -348,10 +405,10 @@ section.main form.appear h1
 
 .userProfile .info {
     background: rgba(27, 111, 132, 0.58);
-    height: 500px;
+    height: auto;
     border-radius: 50px;
     padding: 20px;
-    width: 40%;
+    width: 60%;
     position: relative;
 }
 
@@ -362,18 +419,20 @@ section.main form.appear h1
     text-align: center;
 }
 
-.userProfile p.btn {
-    position: absolute;
-    bottom: 0;
-    right: 50%;
-    transform: translateX(50%);
-    background: #62CB8E;
+.userProfile p.admin-btn {
+    text-align: center;
 }
 
-.userProfile p.btn a,
-.userProfile p.btn a:hover {
-    color: #FFF;
+.userProfile p.admin-btn a{
+    background: #62CB8E;
+    padding: 10px 20px; 
+    color: #3A4A40;
     text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.userProfile p.admin-btn a:hover{
+    color:#FFF;
 }
 
 .userProfile article.dashboard img {
@@ -395,15 +454,17 @@ section.main form.appear h1
 }
 
 .userProfile aside {
-    height: 100%;
+    height: 202px;
     width: 200px;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     margin: 0;
     left: -200px;
     position: absolute;
     transition: left 0.3s ease-in-out;
-    background-image: linear-gradient(to bottom, #9fadbd, #adb1c5, #bdb5c9, #cdb9cb, #dcbeca);
+    background-color: transparent;
     border-radius: 0 20px 20px 0;
+    border: 1px solid #FFF;
 }
 
 .userProfile aside .content,
@@ -413,6 +474,7 @@ section.main form.appear h1
 
 .userProfile aside ul {
     padding-top: 20px;
+    background-color: rgba(0, 0, 0, 0.25);
 }
 
 .userProfile aside img {
@@ -443,13 +505,27 @@ section.main form.appear h1
     width: 20%;
     height: 100%;
     transform: rotateY(175deg);
-    background-image: url("/asset/icons/r2d2.svg");
+    background-image: url("/asset/icons/r2d2Color.svg");
     background-repeat: no-repeat;
+    opacity: 0;
+    transition: 0.1s ease-in-out;
 }
 
 .userProfile aside li:hover:before {
-    background-image: url("/asset/icons/r2d2Color.svg");
+    opacity: 1;
 }
+
+.userProfile aside li a{
+    color:#FFF;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.userProfile aside li a:hover{
+    text-decoration: none;
+    color: #00dde1;
+}
+
 
 /*User add and edit Images*/
 
@@ -486,6 +562,11 @@ section.main form.appear h1
 
 .user section.main .btn {
     width: 100%;
+}
+
+.editImage section.main img{
+    max-width: 100%;
+    height: 100px;
 }
 
 /*User Display Images*/
@@ -736,4 +817,272 @@ footer p {
 footer p a {
     color: #FFF;
     text-decoration: none;
+}
+
+/*ERROR*/
+
+.error404{
+    background-image: url('asset/error404.jpg');
+}
+
+.error403{
+    background-image: url('asset/error403.jpg');
+    background-position: left;
+    background-size: 2200px !important;
+}
+
+.error{
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error .content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error .content p{
+    color:#FFF;
+    font-size: 1.3rem;
+    margin-bottom: 50px;
+    text-align:center;
+}
+
+.error .content h1{
+    color:#FFF;
+    text-align: center;
+    font-size: 4.5rem;
+    margin-bottom: 50px;
+}
+
+.error .content img{
+    max-width: 100%;
+    height: 70px;
+    text-transform: none;
+    animation : circle 2s infinite
+}
+
+.error .content a{
+    color: #007bff;
+    font-size: 1.3rem;
+}
+
+.error .content a:hover{
+    color: #00dde1;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 1024px){
+    .userProfile .info{
+        width: 100%;
+        border-radius: 0;
+    }
+    body:not(.home) header{
+        margin-bottom: 0;
+    }
+
+    .userProfile .main{
+        flex-direction: column;
+    }
+
+    .userProfile aside{
+        position: static;
+        border:none;
+        width: 100%;
+        height: 92px;
+        border-radius: 0;
+        transform: translateY(0);
+    }
+
+    .userProfile aside img{
+        display: none;
+    }
+
+    .userProfile aside ul{
+        display: flex;
+        justify-content: space-around;
+        padding-left: 0;
+    }
+
+    .userProfile aside li:before{
+        display: none;
+    }
+    
+    .userProfile aside li a{
+        padding: 10px 20px;
+        background-color:#008EFF;
+        border-radius: 100px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    header nav ul{
+        top: 0;
+        right: 50%;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        visibility: hidden;
+        position: fixed;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    header nav{
+        justify-content: flex-start;
+        position: relative;
+    }
+
+    header nav div.hamburger{
+        display:block !important;
+        z-index: 1000;
+    }
+
+    header nav div.hamburger.active .line2{
+        opacity: 0;
+    }
+
+    header nav div.hamburger.active .line1, header nav div.hamburger.active .line3{
+        top:11px ;
+    }
+    header nav div.hamburger.active .line1{
+        transform: rotate(45deg);
+    }
+
+    header nav div.hamburger.active .line3{
+        transform: rotate(-45deg);
+    }
+
+    header nav ul.active{
+        height: 100vh;
+        right:0;
+        width: 100vw;
+        flex-direction: column;
+        opacity: 1;
+        visibility: visible;
+        background-color: rgba(0,0,0,0.7);
+        z-index: 999;
+        padding:0;
+    }
+
+    header nav ul.active li, header nav ul.active li a, header nav ul.active li span{
+        width: 100%;
+        text-align: center;
+    }
+
+    header nav ul.active li a{
+        background: none;
+    }
+    header nav ul.active li span{
+        position: static;
+        opacity: 1;
+        font-size:28px;
+        font-weight: 700;
+    }
+
+    .userImages .card .delete{
+        right:10px
+    }
+
+    .userImages .card .edit{
+        left:10px
+    }
+
+    .search form{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 640px){
+    .home form h1{
+        font-size: 30px;
+    }
+    .registration{
+        background-position: center;
+    }
+
+    .userProfile article.dashboard .last-images{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .userProfile article.dashboard img{
+        margin-bottom: 30px;
+    }
+
+    .cloudTags .main{
+        padding: 20px;
+        grid-template-columns: repeat(3,1fr) !important;
+    }
+    .cloudTags h1{
+        grid-column: 1/4;
+    }
+
+    .search form{
+        flex-direction: column;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .search form .btn{
+        width: 50%;
+        margin: auto;
+        margin-top: 10px;
+    }
+
+    .userImages section.main h3{
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 540px){
+    .user form{
+        width: 100%;
+        padding: 20px;
+    }
+
+    .user .select2-container{
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .home form h1, .contact form h1{
+        font-size: 22px;
+    }
+
+    .userProfile aside{
+        height: auto;
+    }
+
+    .userProfile aside ul{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .userProfile .info p {
+        line-height: 27px;
+    }
+
+}
+
+@media screen and (max-width: 380px){
+    .registration form label, .connexion form label, .contact form label{
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 380px){
+    h1{
+        font-size: 1.5rem;
+    }
+    .cloudTags .main{
+        grid-template-columns: repeat(1,1fr) !important;
+    }
+    .cloudTags h1{
+        grid-column: 1/2;
+    }
 }

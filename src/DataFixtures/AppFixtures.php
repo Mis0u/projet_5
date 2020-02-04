@@ -6,7 +6,6 @@ use \Faker\Factory;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\Image;
-use Bezhanov\Faker\Provider\Space;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

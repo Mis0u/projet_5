@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}Bonjour {{user.username}}{% endblock %}
 
 {% block stylesheets %}
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
@@ -10,44 +10,50 @@
 
 
 {% block body %}
-<aside>
-    <img class="rocket" src="/asset/icons/fusee.svg" alt="logo fusée espace nasa">
-    <div class="content">
-        <ul>
-            <li><a href="{{ path('add_image') }}">Ajouter une image</a></li>
-            <li><a href="{{ path('display_images') }}">Afficher mes images</a></li>
-            <li><a href="{{ path('cloud_tags') }}">Nuage de tags</a></li>
-        </ul>
-    </div>
-</aside>
-<section class="info">
-    <article class="dashboard">
-        <h1> Bonjour {{ user.username }} </h1>
-        <div class="images">
-            <p> Vous avez publié {{ user.images|length }} images</p>
-            <p>Vos dernières images publiées :</p>
-            <div class="last-images">
-                {% for lastImages in user.images|slice(-3) %}
-                <img src="{{ lastImages.name }}" class="img-thumbnail">
-                {% endfor %}
+    <aside>
+        <img class="rocket" src="{{asset('/asset/icons/fusee.svg')}}" alt="logo fusée espace nasa">
+        <div class="content">
+            <ul>
+                <li><a href="{{ path('add_image') }}">Ajouter une image</a></li>
+                <li><a href="{{ path('display_images') }}">Afficher mes images</a></li>
+                <li><a href="{{ path('cloud_tags') }}">Nuage de tags</a></li>
+            </ul>
+        </div>
+    </aside>
+    <section class="info">
+        <article class="dashboard">
+            <h1> Bonjour {{ user.username }} </h1>
+            <div class="images">
+            {% if user.images|length == 0  %}
+                <p>Vous n'avez pas encore publié d'images, qu'attendez-vous pour commencer :)</p>
+                {% else %}
+                    <p> Vous avez publié {{ user.images|length }} images</p>
+                <p>Vos dernières images publiées :</p>
+                <div class="last-images">
+                    {% for lastImages in user.images|slice(-3) %}
+                    <img src="{{asset('/images/' ~ lastImages.name )}}" class="img-thumbnail">
+                    {% endfor %}
+                    
+                </div>
+            {% endif %}
+            
                 
+
+            </div>
+            <div >
+                <h2>Anecdotes spatiale</h2>
+                <p id="anecdotes"></p>
             </div>
 
-        </div>
-        <div >
-            <h2>Anecdotes spatiale</h2>
-            <p id="anecdotes"></p>
-        </div>
-
-    </article>
-    {% if is_granted('ROLE_ADMIN') %}
-    <p class="admin-btn btn "><a href="{{path('admin')}}">Administration</a></p>
-    {% endif %}
-</section>
+        </article>
+        {% if is_granted('ROLE_ADMIN') %}
+        <p class="admin-btn "><a class="btn" href="{{path('admin')}}">Administration</a></p>
+        {% endif %}
+    </section>
 {% endblock %}
 
 {% block javascript %}
-<script src="/js/moveAside.js"></script>
-<script src="/js/anecdote.js"></script>
-<script src="/js/main.js"></script>
+<script src="{{asset('/js/moveAside.js')}}"></script>
+<script src="{{asset('/js/anecdote.js')}}"></script>
+<script src="{{asset('/js/main.js')}}"></script>
 {% endblock %}

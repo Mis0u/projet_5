@@ -1,60 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Administration des utilisateurs{% endblock %}
 {% block classBody %} adminUsers admin {% endblock %}
 
 
 {% block body %}
-{% for message in app.flashes('success_delete') %}
-                <div class="flash-notice">
-                <div class="alert alert-success" role="alert">
-                        {{ message }}
-                </div>
-                </div>
-{% endfor %}
+    {% for message in app.flashes('success_delete') %}
+                    <div class="flash-notice">
+                    <div class="alert alert-success" role="alert">
+                            {{ message }}
+                    </div>
+                    </div>
+    {% endfor %}
 
-{{ form_start(form) }}
-{{ form_row(form.username) }}
-<button class="btn btn-primary" type="submit">Rechercher</button>
-{{ form_end(form) }}
+    {{ form_start(form) }}
+    {{ form_row(form.username) }}
+    <button class="btn btn-primary" type="submit">Rechercher</button>
+    {{ form_end(form) }}
 
-{% if users|length == 0 %}
-    <p>Aucun utilisateur ne porte ce pseudo</p>
-    {% else %}
+    {% if users|length == 0 %}
+    <figure class="no-result">
+        <img src="{{ asset('asset/icons/monkey.png') }}"/>
+        <figcaption>
+            <p>Oops ! Il n'y a aucun résultat pour votre recherche</p>
+        </figcaption>
+    </figure>
+        {% else %}
 
-<div class="table-responsive">
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Pseudo</th>
-                <th scope="col">Images uploadées</th>
-                <th scope="col">Actions</th>
-              </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-            <tr>
-                <th scope="row">{{ loop.index }}</th>
-                <td> {{ user.username }} </td>
-                <td> {{ user.images|length }} </td>
-                <td> <a href="{{path('admin_delete_user', {'id': user.id} )}}" class="btn btn-danger" onclick="return confirm('Confirmer la suppression de {{ user.username }}')">Supprimer</a> </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-  </div>
-  {% endif %}
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Images uploadées</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td> {{ user.username }} </td>
+                    <td> {{ user.images|length }} </td>
+                    <td> <a href="{{path('admin_delete_user', {'id': user.id} )}}" class="btn btn-danger" onclick="return confirm('Confirmer la suppression de {{ user.username }}')">Supprimer</a> </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <div>
+    {% endif %}
 
-  {% if users|length <= 1 %}
-  <p class="back-all">  <a class="allUser" href="{{path('admin_users')}}">
-    Tout les utilisateurs
-</a></p>
-  {% endif %}
+    {% if users|length <= 1 %}
+    <p class="back-all"><a class="allUser" href="{{path('admin_users')}}">
+        Tout les utilisateurs
+    </a></p>
+    {% endif %}
 
-  <div class="navigation">
-    <span class="return"><a href="{{ path('admin') }}"><img src="/asset/icons/return.svg" title="retour"> Retour à l'admin</a></span>
+    <div class="navigation">
+        <span class="return"><a href="{{ path('admin') }}"><img src="{{asset('/asset/icons/return.svg')}}" title="retour"> Retour à l'admin</a></span>
 
-    {{ knp_pagination_render(users) }}
-</div>
+        {{ knp_pagination_render(users) }}
+    </div>
 {% endblock %}

@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
+{% block title %}Edition d'une image{% endblock %}
+
 
 {% block stylesheets %}
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
@@ -13,7 +15,7 @@
 
 
 <h1>Modification de l'image :</h1>
-<p><img src="{{ image.name }}"></p>
+<p><img src="{{asset('/images/' ~ image.name )}}"></p>
 
 
 {{ form_start(form) }}
@@ -45,12 +47,13 @@
             var inputFile = event.currentTarget;
             $(inputFile).parent()
                         .find('.custom-file-label')
-                        .html(inputFile.files[0].name);
+                        .html(inputFile.files[0].name)
+                        .css("color","#000");
         });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
-    <script src="/js/selectFormEditImage.js"></script>
+    <script src="{{asset('/js/selectFormEditImage.js')}}"></script>
 
 {% endblock %}

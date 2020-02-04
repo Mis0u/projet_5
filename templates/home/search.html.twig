@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Recherche d'images{% endblock %}
 {% block classBody %} search userImages {% endblock %}
 {% block stylesheets %}<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">{% endblock %}
 
@@ -11,7 +11,13 @@
     <button type = "submit" class="btn btn-info">Rechercher</button>
     {{ form_end(form) }}
     {% if searchImage|length == 0 %}
-    <p>Aucune image ne porte ce tag</p>
+    <figure class="no-result">
+        <img src="{{ asset('asset/icons/monkey.png') }}"/>
+        <figcaption>
+            <p>Oops ! Il n'y a aucun résultat pour votre recherche</p>
+        </figcaption>
+    </figure>
+    
     {% else %}
     <h3>Il y a {{  searchImage|length}} images correspondant à <span class="imgSearch">{{ research.name|upper }}</span> </h3>
     <div class="container">
@@ -19,8 +25,8 @@
         {% for result in searchImage %}
        
 <div class="card">
-    <a href="{{ result.name }}" data-lightbox="search-image" data-title="{{ result.title }}">
-        <img class="card-img-top" src= "{{ result.name }}">
+    <a href="{{asset('/images/' ~ result.name )}}" data-lightbox="search-image" data-title="{{ result.title }}">
+        <img class="card-img-top" src= "{{asset('/images/' ~ result.name )}}">
     </a>
     <h5> {{ result.title }} </h5>
     <div class="card-body">

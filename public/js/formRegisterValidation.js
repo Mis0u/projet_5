@@ -12,7 +12,7 @@ input.addEventListener("blur", (e) =>{
 })
 
 password.addEventListener("blur", (e) =>{
-    if (!e.target.value.length <= 2){
+    if (e.target.value.length <= 7){
         passwordInfoError.classList.add("active");
     }else{
         passwordInfoError.classList.remove("active");

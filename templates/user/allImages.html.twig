@@ -1,44 +1,44 @@
 {% extends "base.html.twig" %}
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}Mes images{% endblock %}
 {% block stylesheets %}<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">{% endblock %}
 
 
 {% block classBody %}userImages user{% endblock %}
 
 {% block body %}
-{% for message in app.flashes('success_delete') %}
-                <div class="flash-notice">
-                <div class="alert alert-success" role="alert">
-                        {{ message }}
-                </div>
-                </div>
-                {% endfor %}
+    {% for message in app.flashes('success_delete') %}
+                    <div class="flash-notice">
+                    <div class="alert alert-success" role="alert">
+                            {{ message }}
+                    </div>
+                    </div>
+                    {% endfor %}
 
-<div class = "container">
-{% for image in images %}
-    <div class="card">
-        <a href="{{ image.name }}" data-lightbox="{{ user.username }}" data-title="{{ image.title }}">
-            <img class="card-img-top" src= "{{ image.name }}">
-        </a>
-        <h5> {{ image.title }} </h5>
-        <div class="card-body">
-           {% for tags in image.tags %}
-                <span><a href="{{ path('display_images_tags', {'name': tags.name }) }}">#{{ tags.name }}</a></span>
-           {% endfor %}
-           {% if is_granted('DELETE', image) %}
-           <a href="{{ path('delete_image', {'id': image.id}) }}" class="delete" onclick="return confirm('Confirmer la suppression')" title="Supprimer l'image"><img src="/asset/icons/delete.svg"></a>
-           {% endif %}
-           {% if is_granted('EDIT', image) %}
-           <a href="{{ path('edit_image', {'id': image.id}) }}" class="edit" title="Modifier l'image"><img src="/asset/icons/edit.svg"></a>
-           {% endif %}
+    <div class = "container">
+    {% for image in images %}
+        <div class="card">
+            <a href="{{asset('/images/' ~ image.name )}}" data-lightbox="{{ user.username }}" data-title="{{ image.title }}">
+                <img class="card-img-top" src= "{{asset('/images/' ~ image.name )}}">
+            </a>
+            <h5> {{ image.title }} </h5>
+            <div class="card-body">
+            {% for tags in image.tags %}
+                    <span><a href="{{ path('display_images_tags', {'name': tags.name }) }}">#{{ tags.name }}</a></span>
+            {% endfor %}
+            {% if is_granted('DELETE', image) %}
+            <a href="{{ path('delete_image', {'id': image.id}) }}" class="delete" onclick="return confirm('Confirmer la suppression')" title="Supprimer l'image"><img src="{{asset('/asset/icons/delete.svg')}}"></a>
+            {% endif %}
+            {% if is_granted('EDIT', image) %}
+            <a href="{{ path('edit_image', {'id': image.id}) }}" class="edit" title="Modifier l'image"><img src="{{asset('/asset/icons/edit.svg')}}"></a>
+            {% endif %}
+            </div>
         </div>
+
+    {% endfor %}
     </div>
 
-{% endfor %}
-</div>
+    {% endblock %} 
 
-{% endblock %} 
-
-{% block javascript %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+    {% block javascript %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 {% endblock %}

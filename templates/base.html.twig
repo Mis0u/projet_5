@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="{{asset('asset/icons/fav-icon.png')}}" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('/main.css')}}">
     {% block stylesheets %}{% endblock %}
 </head>
 
@@ -22,9 +23,13 @@
                 </div>
                 {% endfor %}
             {% set route = app.request.attributes.get('_route') %}
-
-            <p><img src="/asset/astroLogo.jpg" alt="logo astronaute espace nasa"></p>
-            <ul>
+            <div class ="hamburger">
+                <div class="line line1"></div>
+                <div class="line line2"></div>
+                <div class="line line3"></div>
+              </div>
+            <p><img src="{{asset('/asset/astroLogo.jpg')}}" alt="logo astronaute espace"></p>
+            <ul id="menu">
                 <li><a class="homepage {% if  route== 'home' %}active{% endif %}"href="{{ path("home") }}" title="Accueil"><span>Accueil</span></a></li>
                 <li><a class="contact {% if  route== 'contact' %}active{% endif %}"href="{{ path("contact") }}"title="Contact"><span>Contact</span></a></li>
                 {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
@@ -53,6 +58,7 @@
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous">
 </script>
+<script src="{{asset('js/menuHamburger.js')}}"></script>
     {% block javascript %}
     {% endblock %}
 </body>

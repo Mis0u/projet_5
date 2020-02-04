@@ -1,5 +1,6 @@
 {% extends "base.html.twig" %}
 
+{% block title %}Ajouter une image{% endblock %}
 
 {% block stylesheets %}
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
@@ -9,50 +10,51 @@
 
 {% block body %}
 
-<h1>Ajout d'une image :</h1>
+    <h1>Ajout d'une image :</h1>
 
 
-{{ form_start(form) }}
-{{ form_row(form.file) }}
-{{ form_row(form.title) }}
-<div class="form-group">
-    <label for="image_allTags">Et enfin le(s) tag(s)</label>
-    <select id="image_allTags" required="required" class="form-control" multiple=""  tabindex="-1" aria-hidden="true">
-    {% for tag in tags %}
-    <option value="{{ tag.id }}">{{ tag.name }}</option>
-    {% endfor %}
-    </select>
-   <small class="form-text text-muted">Psssst, vous pouvez même en créer un vous mêmes !</small>
-</div>
+    {{ form_start(form) }}
+    {{ form_row(form.file) }}
+    {{ form_row(form.title) }}
+    <div class="form-group">
+        <label for="image_allTags">Et enfin le(s) tag(s)</label>
+        <select id="image_allTags" required="required" class="form-control" multiple=""  tabindex="-1" aria-hidden="true">
+        {% for tag in tags %}
+        <option value="{{ tag.id }}">{{ tag.name }}</option>
+        {% endfor %}
+        </select>
+    <small class="form-text text-muted">Psssst, vous pouvez même en créer un vous mêmes !</small>
+    </div>
 
-{{ form_row(form.tags) }}
+    {{ form_row(form.tags) }}
 
-<button type="submit" class="btn btn-primary">Envoyer</button>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
 
-{{ form_end(form) }}
-
-
-<img class="check-title" src="{{ asset('asset/icons/alien-title-add-image-control.png') }}">
-
-{% endblock %}
-
-{% block javascript %}
-
-<script src="/js/formAddTitleImageValidation.js"></script>
+    {{ form_end(form) }}
 
 
-    <script>
-        $('.custom-file-input').on('change', function(event)
-         {
-            var inputFile = event.currentTarget;
-            $(inputFile).parent()
-                        .find('.custom-file-label')
-                        .html(inputFile.files[0].name);
-        });
-    </script>
+    <img class="check-title" src="{{ asset('asset/icons/alien-title-add-image-control.png') }}">
 
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+    {% endblock %}
 
-    <script src="/js/selectFormAddImage.js"></script>
+    {% block javascript %}
+
+    <script src="{{asset('/js/formAddTitleImageValidation.js')}}"></script>
+
+
+        <script>
+            $('.custom-file-input').on('change', function(event)
+            {
+                var inputFile = event.currentTarget;
+                $(inputFile).parent()
+                            .find('.custom-file-label')
+                            .html(inputFile.files[0].name)
+                            .css("color","#000");
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+
+        <script src="{{asset('/js/selectFormAddImage.js')}}"></script>
 
 {% endblock %}

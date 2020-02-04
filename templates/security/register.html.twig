@@ -7,37 +7,37 @@
 
 {% block body %}
 
-{{ form_start(form) }}
-    {{ form_label(form.username) }}       
-    {{ form_widget(form.username) }}
-    {{ form_help(form.username) }}
-    <span>{{ form_errors(form.username) }}</span>
-    {{ form_label(form.plainPassword.first)}}
-    {{ form_widget(form.plainPassword.first)}}
-    {{ form_label(form.plainPassword.second)}}
-    {{ form_widget(form.plainPassword.second)}}
-    {{ form_errors(form.plainPassword.second)}}
-    <button type="submit" class="btn">Inscription</button>
-{{ form_end(form) }}
+    {{ form_start(form) }}
+        {{ form_label(form.username) }}       
+        {{ form_widget(form.username) }}
+        {{ form_help(form.username) }}
+        <span>{{ form_errors(form.username) }}</span>
+        {{ form_label(form.plainPassword.first)}}
+        {{ form_widget(form.plainPassword.first)}}
+        {{ form_label(form.plainPassword.second)}}
+        {{ form_widget(form.plainPassword.second)}}
+        {{ form_errors(form.plainPassword.second)}}
+        <button type="submit" class="btn">Inscription</button>
+    {{ form_end(form) }}
 
-<img class="check-name" src="{{ asset('asset/icons/alien-name-register-control.png') }}">
-<img class="check-password" src="{{ asset('asset/icons/alien-password-register-control.png') }}">
+    <img class="check-name" src="{{ asset('asset/icons/alien-name-register-control.png') }}">
+    <img class="check-password" src="{{ asset('asset/icons/alien-password-register-control.png') }}">
 
 {% endblock %}
 
 {% block javascript %}
-<script src="/js/formRegisterValidation.js"></script>
+    <script src="{{asset('/js/formRegisterValidation.js')}}"></script>
 
-<script>
-    $('form input').on("click",function(){
-        $('form').addClass('appear');
-        $('form h1').addClass('appear');
-        $('form .btn').addClass('appear');
-    })
-    $('body').on("mouseup",function(){
-        $('form').removeClass('appear');
-        $('form h1').removeClass('appear');
-        $('form .btn').removeClass('appear');
-    })
-</script>
+    <script>
+        $('form input').on("click",function(){
+            $('form').addClass('appear');
+            $('form h1').addClass('appear');
+            $('form .btn').addClass('appear');
+        })
+        $('body').on("mouseup",function(){
+            $('form').removeClass('appear');
+            $('form h1').removeClass('appear');
+            $('form .btn').removeClass('appear');
+        })
+    </script>
 {% endblock %}

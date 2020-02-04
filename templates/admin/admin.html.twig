@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Administration{% endblock %}
 {% block classBody %} adminProfile admin {% endblock %}
 
 
 {% block body %}
 <div class="container">
     <figure>
-        <a href="{{path('admin_users')}}" title="liste des utilisateurs"><img src="/asset/icons/scientist.svg"></a>
+        <a href="{{path('admin_users')}}" title="liste des utilisateurs"><img src="{{asset('/asset/icons/scientist.svg')}}"></a>
         <figcaption>
             Liste des utilisateurs
         </figcaption>
     </figure>
     <figure>
-        <a href="{{path('admin_images')}}" title="liste des images"><img src="/asset/icons/mars.svg"></a>
+        <a href="{{path('admin_images')}}" title="liste des images"><img src="{{asset('/asset/icons/mars.svg')}}"></a>
         <figcaption>
             Liste des images
         </figcaption>
