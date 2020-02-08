@@ -714,6 +714,11 @@ section.main form.appear h1
     border-color: #00ffe9;
 }
 
+.adminUsers section.main, .adminImages section.main{
+    display: flex;
+    flex-direction: column;
+}
+
 .admin section.main form{
     display: flex;
     justify-content: center;
@@ -756,8 +761,6 @@ section.main form.appear h1
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: absolute;
-    bottom: -45px;
 }
 
 .admin .navigation img{
@@ -993,6 +996,11 @@ footer p a {
 
     .search form{
         width: 80%;
+        position: static;
+    }
+
+    .admin section.main form label{
+        color: #00000f;
     }
 }
 
@@ -1036,6 +1044,28 @@ footer p a {
     .userImages section.main h3{
         font-size: 24px;
     }
+
+    .admin .navigation{
+        flex-direction: column;
+    }
+
+    .admin .navigation .return{
+        margin-bottom: 20px;
+    }
+
+    .admin section.main form{
+        flex-direction: column;
+    }
+    .admin section.main form .form-group{
+        width: 100%;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .admin section.main form button{
+        width: 50%;
+        margin: auto;
+    }
 }
 
 @media screen and (max-width: 540px){
@@ -1067,15 +1097,23 @@ footer p a {
         line-height: 27px;
     }
 
+    .admin .page-link{
+        padding: 0.5rem 0.45rem;
+    }
+
 }
 
 @media screen and (max-width: 380px){
     .registration form label, .connexion form label, .contact form label{
         font-size: 15px;
     }
+
+    .admin .page-link{
+        padding: 0.5rem 0.05rem;
+    }
 }
 
-@media screen and (max-width: 380px){
+@media screen and (max-width: 320px){
     h1{
         font-size: 1.5rem;
     }

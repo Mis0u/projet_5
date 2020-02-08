@@ -10,7 +10,7 @@ class Contact
     /**
      * @Assert\NotBlank(message="Si je n'ai pas votre nom, comment savoir à qui je m'adresse !!!")
      * @Assert\Length(
-     *      min = 2,
+     *      min = 3,
      *      max = 20,
      *      minMessage = "Une seule lettre voyons! Donnez moi au moins un surnom...",
      *      maxMessage = "Un prénom qui a plus de 19 lettres, mais bien sûr !"

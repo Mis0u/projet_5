@@ -14,7 +14,7 @@
                     </div>
                     {% endfor %}
 
-    <div class = "container">
+    <div class = "container">    
     {% for image in images %}
         <div class="card">
             <a href="{{asset('/images/' ~ image.name )}}" data-lightbox="{{ user.username }}" data-title="{{ image.title }}">
