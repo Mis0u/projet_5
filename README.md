@@ -7,8 +7,3 @@ Pour travailler sur ce projet, vous devez :
 - Importer la base de donnée dans votre base Mysql
 - Dans le fichier .env, soyez sûr d'être en DEV
 - Pour finir lancer le serveur avec le serveur interne de symfony (ex: symfony server:start)
-
-Pour accèder à l'admin :
-
-- user : mickael
-- password: laposte57
